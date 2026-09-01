@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客创作</title>
+    <style id="theme-vars">
+/* ============================================================
+   Im-chc 个人博客 · 深色简约现代主题
+   brand prefix: im
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Dark base (default) ---------- */
+:root {
+  --im-background: #0b0d12;
+  --im-foreground: #eaeef7;
+  --im-card: #12151d;
+  --im-card-foreground: #eaeef7;
+  --im-popover: #171b26;
+  --im-popover-foreground: #eaeef7;
+  --im-primary: #7c8cff;
+  --im-primary-foreground: #0b0d12;
+  --im-muted: #141824;
+  --im-muted-foreground: #8f98ac;
+  --im-border: #1e2330;
+  --im-input: #1e2330;
+  --im-ring: rgba(124, 140, 255, 0.45);
+  --im-radius-small: 4px;
+  --im-radius-medium: 8px;
+  --im-radius-large: 12px;
+  --im-radius-full: 9999px;
+
+  /* brand primary scale (single hue: indigo) */
+  --im-primary-50: #eef0ff;
+  --im-primary-100: #e0e3ff;
+  --im-primary-200: #c6ccff;
+  --im-primary-300: #a6adff;
+  --im-primary-400: #8f98ff;
+  --im-primary-500: #7c8cff;
+  --im-primary-600: #636ef0;
+  --im-primary-700: #4d55d0;
+  --im-primary-800: #3f45a3;
+  --im-primary-900: #363b7e;
+
+  /* neutral scale (dark) */
+  --im-neutral-50: #f3f5fa;
+  --im-neutral-100: #e7eaf2;
+  --im-neutral-200: #c9cfdc;
+  --im-neutral-300: #9aa3b5;
+  --im-neutral-400: #6b7488;
+  --im-neutral-500: #4a5163;
+  --im-neutral-600: #323848;
+  --im-neutral-700: #242936;
+  --im-neutral-800: #1a1e28;
+  --im-neutral-900: #12151d;
+
+  /* semantic state colors */
+  --state-success: #3ddc97;
+  --state-warning: #f5b544;
+  --state-error: #f56565;
+  --state-info: #4aa8ff;
+
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --im-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
+  --im-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------- Light alternative ---------- */
+.light {
+  --im-background: #f6f7fb;
+  --im-foreground: #141824;
+  --im-card: #ffffff;
+  --im-card-foreground: #141824;
+  --im-popover: #ffffff;
+  --im-popover-foreground: #141824;
+  --im-primary: #5565e8;
+  --im-primary-foreground: #ffffff;
+  --im-muted: #eceef5;
+  --im-muted-foreground: #5b6478;
+  --im-border: #e3e7f0;
+  --im-input: #e3e7f0;
+  --im-ring: rgba(85, 101, 232, 0.35);
+  --im-shadow-sm: 0 1px 2px rgba(20, 24, 36, 0.04);
+  --im-shadow-md: 0 4px 14px rgba(20, 24, 36, 0.05);
+  --im-shadow-lg: 0 12px 32px rgba(20, 24, 36, 0.06);
+}
+
+/* ---------- Typography ---------- */
+.font-sans,
+body {
+  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.font-display {
+  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.text-hero {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.text-section {
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Base polish ---------- */
+::selection {
+  background: var(--im-primary);
+  color: var(--im-primary-foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--im-background);
+  color: var(--im-foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* subtle ambient glow used by hero/cards */
+.ambient-glow {
+  background:
+    radial-gradient(60% 80% at 20% 10%, rgba(124, 140, 255, 0.16), transparent 60%),
+    radial-gradient(50% 70% at 90% 20%, rgba(124, 140, 255, 0.08), transparent 60%);
+}
+
+.card-surface {
+  background: var(--im-card);
+  border: 1px solid var(--im-border);
+  border-radius: var(--im-radius-large);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--im-neutral-700);
+  border-radius: 9999px;
+  border: 2px solid var(--im-background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--im-neutral-600);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--im-background);
+    --color-foreground: var(--im-foreground);
+    --color-card: var(--im-card);
+    --color-card-foreground: var(--im-card-foreground);
+    --color-popover: var(--im-popover);
+    --color-popover-foreground: var(--im-popover-foreground);
+    --color-primary: var(--im-primary);
+    --color-primary-foreground: var(--im-primary-foreground);
+    --color-muted: var(--im-muted);
+    --color-muted-foreground: var(--im-muted-foreground);
+    --color-border: var(--im-border);
+    --color-input: var(--im-input);
+    --color-ring: var(--im-ring);
+    --radius-sm: var(--im-radius-small);
+    --radius-md: var(--im-radius-medium);
+    --radius-lg: var(--im-radius-large);
+  }
+  @layer base {
+    body { background: var(--im-background); color: var(--im-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--im-background); }
+      .text-background { color: var(--im-background); }
+      .border-background { border-color: var(--im-background); }
+      .ring-background { --tw-ring-color: var(--im-background); }
+      .bg-foreground { background-color: var(--im-foreground); }
+      .text-foreground { color: var(--im-foreground); }
+      .border-foreground { border-color: var(--im-foreground); }
+      .ring-foreground { --tw-ring-color: var(--im-foreground); }
+      .bg-card { background-color: var(--im-card); }
+      .text-card { color: var(--im-card); }
+      .border-card { border-color: var(--im-card); }
+      .ring-card { --tw-ring-color: var(--im-card); }
+      .bg-card-foreground { background-color: var(--im-card-foreground); }
+      .text-card-foreground { color: var(--im-card-foreground); }
+      .border-card-foreground { border-color: var(--im-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--im-card-foreground); }
+      .bg-popover { background-color: var(--im-popover); }
+      .text-popover { color: var(--im-popover); }
+      .border-popover { border-color: var(--im-popover); }
+      .ring-popover { --tw-ring-color: var(--im-popover); }
+      .bg-popover-foreground { background-color: var(--im-popover-foreground); }
+      .text-popover-foreground { color: var(--im-popover-foreground); }
+      .border-popover-foreground { border-color: var(--im-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--im-popover-foreground); }
+      .bg-primary { background-color: var(--im-primary); }
+      .text-primary { color: var(--im-primary); }
+      .border-primary { border-color: var(--im-primary); }
+      .ring-primary { --tw-ring-color: var(--im-primary); }
+      .bg-primary-foreground { background-color: var(--im-primary-foreground); }
+      .text-primary-foreground { color: var(--im-primary-foreground); }
+      .border-primary-foreground { border-color: var(--im-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--im-primary-foreground); }
+      .bg-muted { background-color: var(--im-muted); }
+      .text-muted { color: var(--im-muted); }
+      .border-muted { border-color: var(--im-muted); }
+      .ring-muted { --tw-ring-color: var(--im-muted); }
+      .bg-muted-foreground { background-color: var(--im-muted-foreground); }
+      .text-muted-foreground { color: var(--im-muted-foreground); }
+      .border-muted-foreground { border-color: var(--im-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--im-muted-foreground); }
+      .bg-border { background-color: var(--im-border); }
+      .text-border { color: var(--im-border); }
+      .border-border { border-color: var(--im-border); }
+      .ring-border { --tw-ring-color: var(--im-border); }
+      .bg-input { background-color: var(--im-input); }
+      .text-input { color: var(--im-input); }
+      .border-input { border-color: var(--im-input); }
+      .ring-input { --tw-ring-color: var(--im-input); }
+      .bg-ring { background-color: var(--im-ring); }
+      .text-ring { color: var(--im-ring); }
+      .border-ring { border-color: var(--im-ring); }
+      .ring-ring { --tw-ring-color: var(--im-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+  <style id="critical-layout">
+    .shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column}
+    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 85%,transparent);backdrop-filter:blur(10px)}
+    .logo-mark{background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
+    .nav-item{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
+    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
+    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 12%,transparent)}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
+    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
+    .panel{background:var(--im-card);border:1px solid var(--im-border);border-radius:16px}
+    .field-label{display:block;font-size:12px;font-weight:600;color:var(--im-foreground);margin-bottom:8px}
+    .input{width:100%;height:44px;border-radius:10px;border:1px solid var(--im-border);background:var(--im-card);color:var(--im-foreground);padding:0 14px;font-size:14px;transition:border-color .16s ease,box-shadow .16s ease}
+    .input:focus{outline:none;border-color:var(--im-primary);box-shadow:0 0 0 2px var(--im-ring)}
+    .textarea{width:100%;min-height:420px;border-radius:0 0 10px 10px;border:1px solid var(--im-border);border-top:0;background:var(--im-card);color:var(--im-foreground);padding:14px 16px;font-size:14px;line-height:1.8;resize:vertical}
+    .textarea:focus{outline:none;border-color:var(--im-primary)}
+    .chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--im-border);background:var(--im-card);color:var(--im-muted-foreground);font-size:13px;transition:all .16s ease}
+    .chip[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 14%,transparent);border-color:var(--im-primary);color:var(--im-primary)}
+    .toolbar-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;color:var(--im-muted-foreground)}
+    .toolbar-btn:hover{background:color-mix(in srgb,var(--im-primary) 8%,transparent);color:var(--im-foreground)}
+    .pick{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--im-border);transition:border-color .16s ease}
+    .pick img{width:100%;height:100%;object-fit:cover}
+    .pick[data-active="true"]{border-color:var(--im-primary);box-shadow:0 0 0 2px var(--im-ring)}
+    .pick .check{position:absolute;top:6px;right:6px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:999px;background:var(--im-primary);color:var(--im-primary-foreground)}
+    .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;width:100%;border-radius:10px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
+    .btn-primary:hover{transform:translateY(-1px);opacity:.94}
+    .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;border-radius:10px;border:1px solid var(--im-border);color:var(--im-foreground);font-size:14px;font-weight:500;transition:border-color .16s ease}
+    .btn-secondary:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border))}
+    .post-item{display:flex;align-items:center;gap:10px;width:100%;border-radius:10px;padding:9px 10px;text-align:left;color:var(--im-muted-foreground);transition:background .16s ease}
+    .post-item:hover{background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
+    .post-item[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-foreground)}
+  </style>
+
+  <div class="shell-root">
+    <header class="site-header">
+      <div class="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-6">
+        <a href="index.html" class="flex min-w-0 items-center gap-2.5" aria-label="Im-chc 首页">
+          <span class="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg">
+            <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
+          </span>
+          <span class="font-display truncate text-lg font-bold tracking-tight">Im-chc</span>
+        </a>
+        <nav class="flex items-center gap-1" aria-label="主导航">
+          <a href="index.html" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
+          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
+          <a href="blog.html" data-nav-key="blog" data-active="true" class="nav-item">博客创作</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"><i data-lucide="save" class="h-3.5 w-3.5"></i>草稿已保存</span>
+          <button type="button" class="icon-btn" aria-label="设置"><i data-lucide="settings" class="h-[18px] w-[18px]"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full max-w-7xl self-center px-6 pb-6 pt-6">
+      <div class="grid gap-5 lg:grid-cols-[250px_1fr_300px]">
+        <!-- 左侧：文章列表 -->
+        <aside class="panel flex flex-col p-3" aria-label="文章列表">
+          <div class="mb-2 flex items-center justify-between px-2 py-1">
+            <span class="text-sm font-semibold">我的文章</span>
+            <button type="button" class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" aria-label="新建文章"><i data-lucide="plus" class="h-4 w-4"></i></button>
+          </div>
+          <div class="flex flex-col gap-1">
+            <button type="button" data-active="true" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">雾山日出，一场说走就走…</span></button>
+            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">深夜霓虹下的城市漫游指南</span></button>
+            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">在雪线之上，遇见自己</span></button>
+            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">2026 我的年度歌单 Top 10</span></button>
+            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">巷口那家深夜食堂的治愈力</span></button>
+          </div>
+        </aside>
+
+        <!-- 中间：编辑器 -->
+        <section class="panel overflow-hidden" aria-label="编辑器">
+          <input class="input !h-[58px] rounded-none border-l-0 border-r-0 border-t-0 text-base font-semibold" type="text" placeholder="标题" value="雾山日出，一场说走就走的短途徒步">
+          <div class="flex items-center gap-1 border-b border-border bg-muted px-3 py-2">
+            <span class="toolbar-btn"><i data-lucide="bold" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="italic" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="heading-2" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="list" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="quote" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="image-plus" class="h-4 w-4"></i></span>
+            <span class="toolbar-btn"><i data-lucide="code" class="h-4 w-4"></i></span>
+            <span class="ml-auto text-xs text-muted-foreground">Markdown</span>
+          </div>
+          <textarea class="textarea" aria-label="正文">清晨四点的盘山公路，薄雾把路灯晕成一团光。
+
+## 出发
+凌晨三点起床，背包里只有水、面包和一件冲锋衣。云海之上，太阳正慢慢升起。
+
+## 云海之上
+四点四十分，天边开始泛白。云雾从山谷里漫上来，像一片缓慢翻涌的海。</textarea>
+        </section>
+
+        <!-- 右侧：发布设置 -->
+        <aside class="flex flex-col gap-5" aria-label="发布设置">
+          <section class="panel p-4">
+            <span class="field-label">归类标签</span>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" data-active="true" class="chip"><i data-lucide="clapperboard" class="h-3.5 w-3.5"></i>电影</button>
+              <button type="button" class="chip"><i data-lucide="disc" class="h-3.5 w-3.5"></i>音乐</button>
+              <button type="button" class="chip"><i data-lucide="compass" class="h-3.5 w-3.5"></i>旅行</button>
+              <button type="button" class="chip"><i data-lucide="utensils" class="h-3.5 w-3.5"></i>美食</button>
+            </div>
+          </section>
+
+          <section class="panel p-4">
+            <span class="field-label">首页轮播图配置 <span class="font-normal text-muted-foreground">（最多 3 张）</span></span>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-active="true" class="pick" aria-label="选择雾山晨景">
+                <img src="assets/carousel-morning.svg" alt="雾山晨景">
+                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
+              </button>
+              <button type="button" data-active="true" class="pick" aria-label="选择城市夜景">
+                <img src="assets/carousel-night.svg" alt="城市夜景">
+                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
+              </button>
+              <button type="button" data-active="true" class="pick" aria-label="选择雪山峰峦">
+                <img src="assets/carousel-mountain.svg" alt="雪山峰峦">
+                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel p-4">
+            <div class="flex items-center justify-between">
+              <span class="field-label mb-0">发布时间</span>
+              <span class="text-xs text-muted-foreground">2026.05.12 08:30</span>
+            </div>
+          </section>
+
+          <div class="flex flex-col gap-2">
+            <button type="button" class="btn-primary"><i data-lucide="send" class="h-4 w-4"></i>发布文章</button>
+            <button type="button" class="btn-secondary"><i data-lucide="save" class="h-4 w-4"></i>保存草稿</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="w-full border-t border-border bg-background">
+      <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-8">
+        <div class="flex items-center gap-2.5">
+          <span class="logo-mark flex h-7 w-7 items-center justify-center rounded-md">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+          </span>
+          <span class="font-display text-sm font-semibold">Im-chc 个人博客</span>
+        </div>
+        <p class="text-sm text-muted-foreground">© 2026 Im-chc · 用代码记录生活</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.chip, .pick, .post-item'), function (el) {
+        el.addEventListener('click', function () {
+          var group = el.classList.contains('post-item');
+          if (group) {
+            Array.prototype.forEach.call(document.querySelectorAll('.post-item'), function (o) { o.setAttribute('data-active', 'false'); });
+            el.setAttribute('data-active', 'true');
+            return;
+          }
+          var active = el.getAttribute('data-active') === 'true';
+          el.setAttribute('data-active', active ? 'false' : 'true');
+        });
+      });
+    })();
+  </script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

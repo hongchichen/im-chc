@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0f1f"/><stop offset="1" stop-color="#1b2348"/>
+    </linearGradient>
+    <radialGradient id="plate" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#232c58"/><stop offset="0.7" stop-color="#141a38"/><stop offset="1" stop-color="#0d1128"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <ellipse cx="600" cy="760" rx="520" ry="120" fill="#0a0d1c"/>
+  <circle cx="600" cy="520" r="230" fill="url(#plate)"/>
+  <circle cx="600" cy="520" r="230" fill="none" stroke="#2b3564" stroke-width="3" opacity="0.8"/>
+  <circle cx="600" cy="520" r="150" fill="#1a2148"/>
+  <path d="M600 470 a60 60 0 0 1 0 120 a30 30 0 0 1 0 -60 a60 60 0 0 1 0 -120 a90 90 0 0 1 0 180 a15 15 0 0 1 0 -30" fill="#6f83e8" opacity="0.85"/>
+  <g stroke="#8fa3ff" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.5">
+    <path d="M560 300 q-18 -30 0 -56"/>
+    <path d="M640 300 q18 -30 0 -56"/>
+    <path d="M600 290 q-10 -24 0 -48"/>
+  </g>
+</svg>
