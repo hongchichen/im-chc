@@ -6,109 +6,126 @@
     <title>文章详情</title>
     <style id="theme-vars">
 /* ============================================================
-   Im-chc 个人博客 · 深色简约现代主题
+   Im-chc 个人博客 · 苹果风格响应式主题（草稿版）
    brand prefix: im
+   参考设计系统: Pinguo / Apple HIG
+   要点: Space Black + Silver Mist + System Blue，DM Sans 正文、
+   JetBrains Mono 技术字，1px 边框 + 轻声阴影，胶囊按钮，
+   大圆角，留白优先；全设备响应式（390/768/1024/1440）。
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Apple System Palette ---------- */
+:root {
+  /* brand blue scale (System Blue #007AFF anchored) */
+  --im-primary-50: #e8f2ff;
+  --im-primary-100: #cfe5ff;
+  --im-primary-200: #9fcbff;
+  --im-primary-300: #66abff;
+  --im-primary-400: #2e8dff;
+  --im-primary-500: #007aff;
+  --im-primary-600: #0064d6;
+  --im-primary-700: #004fad;
+  --im-primary-800: #003b82;
+  --im-primary-900: #00275a;
+
+  /* neutral scale (dark: Space Black family) */
+  --im-neutral-50: #f5f5f7;
+  --im-neutral-100: #e3e3e8;
+  --im-neutral-200: #c7c7cc;
+  --im-neutral-300: #aeaeb2;
+  --im-neutral-400: #8e8e93;
+  --im-neutral-500: #6e6e73;
+  --im-neutral-600: #48484a;
+  --im-neutral-700: #3a3a3c;
+  --im-neutral-800: #2c2c2e;
+  --im-neutral-900: #1c1c1e;
+
+  /* semantic state colors */
+  --state-success: #34c759;
+  --state-success-dark: #30d158;
+  --state-warning: #ff9f0a;
+  --state-error: #ff3b30;
+  --state-error-dark: #ff453a;
+  --state-info: #0a84ff;
+}
 
 /* ---------- Dark base (default) ---------- */
 :root {
-  --im-background: #0b0d12;
-  --im-foreground: #eaeef7;
-  --im-card: #12151d;
-  --im-card-foreground: #eaeef7;
-  --im-popover: #171b26;
-  --im-popover-foreground: #eaeef7;
-  --im-primary: #7c8cff;
-  --im-primary-foreground: #0b0d12;
-  --im-muted: #141824;
-  --im-muted-foreground: #8f98ac;
-  --im-border: #1e2330;
-  --im-input: #1e2330;
-  --im-ring: rgba(124, 140, 255, 0.45);
-  --im-radius-small: 4px;
-  --im-radius-medium: 8px;
-  --im-radius-large: 12px;
+  --im-background: #000000;
+  --im-foreground: #f5f5f7;
+  --im-card: #1c1c1e;
+  --im-card-foreground: #f5f5f7;
+  --im-popover: #3a3a3c;
+  --im-popover-foreground: #f5f5f7;
+  --im-primary: #2e8dff;
+  --im-primary-foreground: #ffffff;
+  --im-muted: #1c1c1e;
+  --im-muted-foreground: #8e8e93;
+  --im-accent: #2c2c2e;
+  --im-accent-foreground: #f5f5f7;
+  --im-border: #3a3a3c;
+  --im-input: #3a3a3c;
+  --im-ring: rgba(46, 141, 255, 0.5);
+  --im-radius-small: 8px;
+  --im-radius-medium: 14px;
+  --im-radius-large: 20px;
   --im-radius-full: 9999px;
 
-  /* brand primary scale (single hue: indigo) */
-  --im-primary-50: #eef0ff;
-  --im-primary-100: #e0e3ff;
-  --im-primary-200: #c6ccff;
-  --im-primary-300: #a6adff;
-  --im-primary-400: #8f98ff;
-  --im-primary-500: #7c8cff;
-  --im-primary-600: #636ef0;
-  --im-primary-700: #4d55d0;
-  --im-primary-800: #3f45a3;
-  --im-primary-900: #363b7e;
-
-  /* neutral scale (dark) */
-  --im-neutral-50: #f3f5fa;
-  --im-neutral-100: #e7eaf2;
-  --im-neutral-200: #c9cfdc;
-  --im-neutral-300: #9aa3b5;
-  --im-neutral-400: #6b7488;
-  --im-neutral-500: #4a5163;
-  --im-neutral-600: #323848;
-  --im-neutral-700: #242936;
-  --im-neutral-800: #1a1e28;
-  --im-neutral-900: #12151d;
-
-  /* semantic state colors */
-  --state-success: #3ddc97;
-  --state-warning: #f5b544;
-  --state-error: #f56565;
-  --state-info: #4aa8ff;
-
-  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --im-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.05);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Light alternative ---------- */
+/* ---------- Light alternative (Silver Mist family) ---------- */
 .light {
-  --im-background: #f6f7fb;
-  --im-foreground: #141824;
+  --im-background: #f5f5f7;
+  --im-foreground: #1d1d1f;
   --im-card: #ffffff;
-  --im-card-foreground: #141824;
+  --im-card-foreground: #1d1d1f;
   --im-popover: #ffffff;
-  --im-popover-foreground: #141824;
-  --im-primary: #5565e8;
+  --im-popover-foreground: #1d1d1f;
+  --im-primary: #007aff;
   --im-primary-foreground: #ffffff;
-  --im-muted: #eceef5;
-  --im-muted-foreground: #5b6478;
-  --im-border: #e3e7f0;
-  --im-input: #e3e7f0;
-  --im-ring: rgba(85, 101, 232, 0.35);
-  --im-shadow-sm: 0 1px 2px rgba(20, 24, 36, 0.04);
-  --im-shadow-md: 0 4px 14px rgba(20, 24, 36, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(20, 24, 36, 0.06);
+  --im-muted: #f2f2f7;
+  --im-muted-foreground: #6e6e73;
+  --im-accent: #f2f2f7;
+  --im-accent-foreground: #1d1d1f;
+  --im-border: #d1d1d6;
+  --im-input: #d1d1d6;
+  --im-ring: rgba(0, 122, 255, 0.35);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
 }
 
 /* ---------- Typography ---------- */
 .font-sans,
 body {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, -apple-system, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .font-display {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+}
+
 .text-hero {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .text-section {
-  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-  line-height: 1.25;
-  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -120,6 +137,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -127,13 +145,7 @@ body {
   color: var(--im-foreground);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-/* subtle ambient glow used by hero/cards */
-.ambient-glow {
-  background:
-    radial-gradient(60% 80% at 20% 10%, rgba(124, 140, 255, 0.16), transparent 60%),
-    radial-gradient(50% 70% at 90% 20%, rgba(124, 140, 255, 0.08), transparent 60%);
+  overflow-x: hidden;
 }
 
 .card-surface {
@@ -142,22 +154,121 @@ body {
   border-radius: var(--im-radius-large);
 }
 
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* ---------- Apple component primitives (responsive) ---------- */
+
+/* Pill button */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--im-radius-full);
+  background: var(--im-primary);
+  color: var(--im-primary-foreground);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter .18s ease, transform .18s ease, opacity .18s ease;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.btn-pill:hover { filter: brightness(.95); }
+.btn-pill:active { transform: scale(.98); }
+.btn-pill:disabled { opacity: .42; cursor: not-allowed; }
+
+/* Secondary pill */
+.btn-pill-secondary {
+  background: var(--im-muted);
+  color: var(--im-foreground);
+  border: 1px solid var(--im-border);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--im-neutral-700);
-  border-radius: 9999px;
-  border: 2px solid var(--im-background);
+.btn-pill-secondary:hover { filter: brightness(1.06); }
+
+/* Top nav item (Apple Store style) */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--im-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--im-muted-foreground);
+  transition: color .18s ease, background .18s ease;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--im-neutral-600);
+.nav-item:hover { color: var(--im-foreground); background: var(--im-accent); }
+.nav-item[data-active="true"] { color: var(--im-primary); background: color-mix(in srgb, var(--im-primary) 14%, transparent); }
+
+/* Mobile bottom tab bar (Apple-style, blur + safe-area) */
+.mobile-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-top: 1px solid var(--im-border);
+  background: color-mix(in srgb, var(--im-background) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
+.mobile-tabbar .mtab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--im-radius-medium);
+  color: var(--im-muted-foreground);
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.mobile-tabbar .mtab[data-active="true"] { color: var(--im-primary); }
+.mobile-tabbar .mtab i { width: 20px; height: 20px; }
+
+/* Hide top nav on mobile, show tab bar; hide tab bar on desktop */
+@media (max-width: 767px) {
+  .desktop-nav { display: none !important; }
+  .desktop-cta { display: none !important; }
+  .mobile-tabbar { display: flex; }
+}
+@media (min-width: 768px) {
+  .mobile-tabbar { display: none; }
+}
+
+/* Fluid container */
+.shell-main {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
+
+/* Responsive card grid helpers (fallback if Tailwind delayed) */
+.grid-auto-1 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Minimal scrollbar (quiet, Apple-like) */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--im-neutral-700); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--im-neutral-600); }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
@@ -174,6 +285,8 @@ body {
     --color-primary-foreground: var(--im-primary-foreground);
     --color-muted: var(--im-muted);
     --color-muted-foreground: var(--im-muted-foreground);
+    --color-accent: var(--im-accent);
+    --color-accent-foreground: var(--im-accent-foreground);
     --color-border: var(--im-border);
     --color-input: var(--im-input);
     --color-ring: var(--im-ring);
@@ -228,6 +341,14 @@ body {
       .text-muted-foreground { color: var(--im-muted-foreground); }
       .border-muted-foreground { border-color: var(--im-muted-foreground); }
       .ring-muted-foreground { --tw-ring-color: var(--im-muted-foreground); }
+      .bg-accent { background-color: var(--im-accent); }
+      .text-accent { color: var(--im-accent); }
+      .border-accent { border-color: var(--im-accent); }
+      .ring-accent { --tw-ring-color: var(--im-accent); }
+      .bg-accent-foreground { background-color: var(--im-accent-foreground); }
+      .text-accent-foreground { color: var(--im-accent-foreground); }
+      .border-accent-foreground { border-color: var(--im-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--im-accent-foreground); }
       .bg-border { background-color: var(--im-border); }
       .text-border { color: var(--im-border); }
       .border-border { border-color: var(--im-border); }
@@ -258,67 +379,128 @@ body {
       }
     </style>
 </head>
-<body class="min-h-screen font-sans antialiased">
+<body class="font-sans">
   <style id="critical-layout">
-    .shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column}
-    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 85%,transparent);backdrop-filter:blur(10px)}
-    .logo-mark{background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
-    .nav-item{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:8px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
-    .btn-primary:hover{transform:translateY(-1px);opacity:.92}
-    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .tag{display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:999px;font-size:12px;background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-primary)}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--im-border);color:var(--im-foreground);font-size:13px;font-weight:500;transition:border-color .16s ease}
-    .back-btn:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border))}
-    .article-body{font-size:16px;line-height:1.85;color:var(--im-foreground)}
-    .article-body h2{font-display;font-size:22px;font-weight:700;margin:32px 0 12px}
-    .article-body p{margin:14px 0}
-    .article-body blockquote{margin:22px 0;padding:14px 20px;border-left:3px solid var(--im-primary);background:color-mix(in srgb,var(--im-primary) 8%,transparent);border-radius:0 12px 12px 0;color:var(--im-muted-foreground)}
+/* ============================================================
+   文章详情 · 苹果风格响应式关键布局（Pinguo-Apple）
+   全部使用语义 token（--im-*），无硬编码颜色；
+   动效统一 cubic-bezier(.32,.72,0,1)，150–350ms。
+   重点：移动端正文满宽阅读、标题 clamp() 缩放，杜绝逐字竖排。
+   ============================================================ */
+
+/* ---- 页面骨架 ---- */
+.shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column;overflow-x:clip}
+
+/* ---- 顶部导航：桌面 44px Apple Store 式深色顶栏（毛玻璃） ---- */
+.site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 82%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
+.shell-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:44px;max-width:1152px;margin:0 auto;padding:0 clamp(16px,4vw,32px);min-width:0}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo-mark{display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary);border-radius:7px;flex-shrink:0}
+.logo-mark i{width:14px;height:14px}
+.brand-name{font-size:15px;font-weight:700;letter-spacing:-0.02em;color:var(--im-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.desktop-nav{display:flex;align-items:center;gap:2px}
+.shell-nav .nav-item{height:30px;min-height:30px;padding:0 12px;font-size:13px}
+.desktop-cta{display:flex;align-items:center;gap:10px}
+.shell-nav .btn-primary{height:32px;min-height:32px;padding:0 16px;gap:6px;font-size:13px;border-radius:var(--im-radius-full);transition:filter .25s cubic-bezier(.32,.72,0,1),transform .25s cubic-bezier(.32,.72,0,1)}
+.shell-nav .btn-primary:hover{filter:brightness(.94)}
+.shell-nav .btn-primary:active{transform:scale(.97)}
+.shell-nav .btn-primary i{width:14px;height:14px}
+.shell-nav .icon-btn{width:32px;height:32px;border-radius:999px;transition:color .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1)}
+.shell-nav .icon-btn i{width:16px;height:16px}
+
+/* ---- 主体容器：流式宽度 + 自适应 padding ---- */
+.shell-main{width:100%;max-width:1152px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,4vw,32px) 132px;min-width:0}
+@media (min-width:768px){ .shell-main{padding-bottom:72px} }
+
+/* ---- 阅读列（桌面 max-w-3xl 居中；移动端满宽 + 合理边距） ---- */
+.article-read{max-width:768px;margin:0 auto;min-width:0}
+
+/* 返回按钮：胶囊圆角 + 1px 边框 */
+.back-btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--im-radius-full);border:1px solid var(--im-border);background:transparent;color:var(--im-foreground);font-size:13px;font-weight:500;text-decoration:none;transition:border-color .25s cubic-bezier(.32,.72,0,1),color .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1)}
+.back-btn:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border));color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 6%,transparent)}
+.back-btn i{width:16px;height:16px}
+
+/* 分类 + 元信息：移动端正常堆叠/换行 */
+.article-kicker{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:clamp(20px,3vw,28px)}
+.tag{display:inline-flex;align-items:center;height:26px;padding:0 14px;border-radius:var(--im-radius-full);font-size:12px;font-weight:500;white-space:nowrap;background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-primary)}
+.article-meta{font-size:13px;line-height:1.5;color:var(--im-muted-foreground);white-space:normal;overflow-wrap:break-word}
+
+/* 标题：clamp() 缩放，禁止逐字竖排 */
+.article-title{font-size:clamp(1.6rem,4.2vw,2.5rem);line-height:1.22;font-weight:700;letter-spacing:-0.02em;color:var(--im-foreground);margin:clamp(12px,2vw,16px) 0 0;overflow-wrap:break-word;word-break:break-word}
+.article-subtitle{margin:10px 0 0;font-size:clamp(1rem,1.7vw,1.125rem);line-height:1.65;color:var(--im-muted-foreground);overflow-wrap:break-word;word-break:break-word}
+
+/* 封面：aspect-ratio 16/9、宽度 100%、移动端高度自适应、大圆角 20px */
+.article-cover{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover;border-radius:var(--im-radius-large);border:1px solid var(--im-border);box-shadow:var(--im-shadow-md);margin-top:clamp(20px,3vw,28px)}
+
+/* 正文：16px / 1.85 舒适行距，窄屏满宽阅读、横向正常换行 */
+.article-body{margin-top:clamp(24px,4vw,32px);font-size:16px;line-height:1.85;color:var(--im-foreground);overflow-wrap:break-word;word-break:break-word;min-width:0}
+.article-body>*{min-width:0}
+.article-body p{margin:0 0 1.1em}
+.article-body h2{margin:2em 0 .8em;font-size:22px;font-weight:700;line-height:1.4;letter-spacing:-0.01em}
+.article-body h3{margin:1.8em 0 .7em;font-size:19px;font-weight:700;line-height:1.4}
+.article-body ul,.article-body ol{margin:0 0 1.1em;padding-left:1.5em}
+.article-body li{margin:.35em 0}
+.article-body a{color:var(--im-primary);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--im-primary) 40%,transparent);text-underline-offset:4px;transition:color .25s cubic-bezier(.32,.72,0,1)}
+.article-body blockquote{margin:1.5em 0;padding:16px 20px;border-left:3px solid var(--im-primary);background:color-mix(in srgb,var(--im-primary) 8%,transparent);border-radius:0 var(--im-radius-medium) var(--im-radius-medium) 0;color:var(--im-muted-foreground);font-size:16px;line-height:1.85}
+.article-body code{font-family:'JetBrains Mono',ui-monospace,'SF Mono',monospace;font-size:.9em;background:var(--im-accent);color:var(--im-accent-foreground);padding:2px 6px;border-radius:6px}
+.article-body pre{background:var(--im-card);border:1px solid var(--im-border);border-radius:var(--im-radius-medium);padding:16px 18px;overflow-x:auto;margin:0 0 1.1em}
+.article-body pre code{background:none;padding:0;color:inherit}
+.article-body img{max-width:100%;height:auto;border-radius:var(--im-radius-medium);margin:0 0 1.1em}
+
+/* 标签区：胶囊 + 自动换行堆叠 */
+.article-tags{margin-top:clamp(28px,4vw,36px);padding-top:clamp(20px,3vw,24px);border-top:1px solid var(--im-border);display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---- 页脚 ---- */
+.site-footer{width:100%;border-top:1px solid var(--im-border);background:var(--im-background)}
+.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;max-width:1152px;margin:0 auto;padding:28px clamp(16px,4vw,32px)}
+.footer-brand{display:flex;align-items:center;gap:10px;min-width:0}
+.footer-brand .logo-mark{width:28px;height:28px;border-radius:8px}
+.footer-brand-name{font-size:14px;font-weight:600;color:var(--im-foreground);white-space:nowrap}
+.footer-copy{font-size:14px;color:var(--im-muted-foreground)}
+
+/* ---- 移动端底部 Tab Bar 细节微调 ---- */
+.mobile-tabbar .mtab{font-size:11px;transition:color .25s cubic-bezier(.32,.72,0,1),transform .25s cubic-bezier(.32,.72,0,1)}
+.mobile-tabbar .mtab:active{transform:scale(.96)}
+.mobile-tabbar .mtab i{width:20px;height:20px}
   </style>
 
   <div class="shell-root">
     <header class="site-header">
-      <div class="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-6">
-        <a href="index.html" class="flex min-w-0 items-center gap-2.5" aria-label="Im-chc 首页">
-          <span class="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg">
-            <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
-          </span>
-          <span class="font-display truncate text-lg font-bold tracking-tight">Im-chc</span>
+      <div class="shell-nav">
+        <a href="#" class="brand" aria-label="Im-chc 首页">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="brand-name font-display">Im-chc</span>
         </a>
-        <nav class="flex items-center gap-1" aria-label="主导航">
-          <a href="index.html" data-nav-key="home" data-active="true" class="nav-item">首页</a>
-          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
-          <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
-          <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#" data-nav-key="home" data-active="true" class="nav-item">首页</a>
+          <a href="#" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="#" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
+          <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <a href="blog.html" data-dom-id="cta-blog" class="btn-primary">
-            <i data-lucide="pen-line" class="h-4 w-4"></i>
+        <div class="desktop-cta">
+          <a href="#" data-dom-id="cta-blog" class="btn-primary">
+            <i data-lucide="pen-line"></i>
             <span>开始创作</span>
           </a>
-          <button type="button" class="icon-btn" aria-label="搜索">
-            <i data-lucide="search" class="h-[18px] w-[18px]"></i>
-          </button>
+          <button type="button" class="icon-btn" aria-label="搜索"><i data-lucide="search"></i></button>
         </div>
       </div>
     </header>
 
-    <main class="w-full max-w-6xl self-center px-6 pb-6 pt-6">
-      <a href="index.html" data-dom-id="back-home" class="back-btn mb-8"><i data-lucide="arrow-left" class="h-4 w-4"></i>返回首页</a>
+    <main class="shell-main">
+      <div class="article-read">
+        <a href="#" data-dom-id="back-home" class="back-btn"><i data-lucide="arrow-left"></i>返回首页</a>
 
-      <article class="mx-auto max-w-3xl" id="article-root">
-        <div class="flex items-center gap-3">
+        <div class="article-kicker">
           <span class="tag" id="art-cat">旅行</span>
-          <span class="text-sm text-muted-foreground" id="art-meta">2026.05.12 · 6 分钟阅读</span>
+          <span class="article-meta" id="art-meta">2026.05.12 · 6 分钟阅读</span>
         </div>
-        <h1 class="font-display mt-4 text-4xl font-bold leading-tight" id="art-title">雾山日出，一场说走就走的短途徒步</h1>
-        <p class="mt-3 text-lg text-muted-foreground" id="art-subtitle">清晨四点的盘山公路与云海之上的一束光</p>
+        <h1 class="article-title font-display" id="art-title">雾山日出，一场说走就走的短途徒步</h1>
+        <p class="article-subtitle" id="art-subtitle">清晨四点的盘山公路与云海之上的一束光</p>
 
-        <img class="mt-7 aspect-[16/9] w-full rounded-2xl border border-border object-cover" id="art-cover" src="assets/carousel-morning.svg" alt="雾山日出徒步封面">
+        <img class="article-cover" id="art-cover" src="assets/carousel-morning.svg" alt="雾山日出徒步封面">
 
-        <div class="mt-8 article-body" id="art-content">
+        <div class="article-body" id="art-content">
           <p>凌晨三点，闹钟把整个房间叫醒。背包里只有一瓶水、两片面包和一件冲锋衣，我便出了门。</p>
           <p>车沿盘山公路缓缓爬升，路灯把薄雾晕成一团一团的暖光。同行的人不多，大家都安静地等着天亮。</p>
           <h2>云海之上</h2>
@@ -329,27 +511,40 @@ body {
           <p>这条路线全程往返约八公里，爬升不到六百米，对新手足够友好。如果你也想看云海日出，记得查好天气，凌晨出发。</p>
         </div>
 
-        <div class="mt-9 flex flex-wrap gap-2 border-t border-border pt-6" id="art-tags">
+        <div class="article-tags" id="art-tags">
           <span class="tag">短途徒步</span>
           <span class="tag">云海</span>
           <span class="tag">日出</span>
           <span class="tag">攻略</span>
         </div>
-      </article>
+      </div>
     </main>
 
-    <footer class="w-full border-t border-border bg-background">
-      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-8">
-        <div class="flex items-center gap-2.5">
-          <span class="logo-mark flex h-7 w-7 items-center justify-center rounded-md">
-            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
-          </span>
-          <span class="font-display text-sm font-semibold">Im-chc 个人博客</span>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="footer-brand-name font-display">Im-chc 个人博客</span>
         </div>
-        <p class="text-sm text-muted-foreground">© 2026 Im-chc · 用代码记录生活</p>
+        <p class="footer-copy">© 2026 Im-chc · 用代码记录生活</p>
       </div>
     </footer>
   </div>
+
+  <nav class="mobile-tabbar" aria-label="移动端底部导航">
+    <a href="#" data-dom-id="tab-home" class="mtab" data-active="true">
+      <i data-lucide="home"></i><span>首页</span>
+    </a>
+    <a href="#" data-dom-id="tab-life" class="mtab">
+      <i data-lucide="camera"></i><span>人生时刻</span>
+    </a>
+    <a href="#" data-dom-id="tab-category" class="mtab">
+      <i data-lucide="layout-grid"></i><span>分类点评</span>
+    </a>
+    <a href="#" data-dom-id="tab-blog" class="mtab">
+      <i data-lucide="pen-line"></i><span>博客创作</span>
+    </a>
+  </nav>
 
   <script src="assets/cms.js"></script>
   <script>
@@ -360,28 +555,19 @@ body {
       }
       function apply(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
       function applyHtml(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
-      function pickId() {
-        var m = (location.search || '').match(/[?&]id=([^&]+)/);
-        return m ? decodeURIComponent(m[1]) : null;
-      }
       CMS.loadLocal().then(function () {
-        var id = pickId();
-        var post = CMS.getPost(id);
-        if (!post) {
-          var arr = CMS.latest(1);
-          if (arr.length) { post = arr[0]; }
-        }
-        if (!post) return;
+        var arr = CMS.latest(1);
+        if (!arr.length) return;
+        var post = arr[0];
         apply('art-cat', post.category || '');
         apply('art-meta', (post.date || '') + ' · ' + (post.readingMinutes || 5) + ' 分钟阅读');
         apply('art-title', post.title || '');
         apply('art-subtitle', post.subtitle || '');
         var cover = document.getElementById('art-cover');
-        if (cover && post.cover) cover.src = post.cover;
+        if (cover && post.cover) cover.src = CMS.resolveAsset(post.cover);
         applyHtml('art-content', CMS.renderMarkdown(post.content || ''));
         var tags = (post.tags || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
         applyHtml('art-tags', tags);
-        document.title = (post.title || '文章') + ' · Im-chc';
       }).catch(function () { /* 数据未加载时保留静态示例 */ });
     })();
   </script>

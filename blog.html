@@ -6,109 +6,126 @@
     <title>博客创作</title>
     <style id="theme-vars">
 /* ============================================================
-   Im-chc 个人博客 · 深色简约现代主题
+   Im-chc 个人博客 · 苹果风格响应式主题（草稿版）
    brand prefix: im
+   参考设计系统: Pinguo / Apple HIG
+   要点: Space Black + Silver Mist + System Blue，DM Sans 正文、
+   JetBrains Mono 技术字，1px 边框 + 轻声阴影，胶囊按钮，
+   大圆角，留白优先；全设备响应式（390/768/1024/1440）。
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Apple System Palette ---------- */
+:root {
+  /* brand blue scale (System Blue #007AFF anchored) */
+  --im-primary-50: #e8f2ff;
+  --im-primary-100: #cfe5ff;
+  --im-primary-200: #9fcbff;
+  --im-primary-300: #66abff;
+  --im-primary-400: #2e8dff;
+  --im-primary-500: #007aff;
+  --im-primary-600: #0064d6;
+  --im-primary-700: #004fad;
+  --im-primary-800: #003b82;
+  --im-primary-900: #00275a;
+
+  /* neutral scale (dark: Space Black family) */
+  --im-neutral-50: #f5f5f7;
+  --im-neutral-100: #e3e3e8;
+  --im-neutral-200: #c7c7cc;
+  --im-neutral-300: #aeaeb2;
+  --im-neutral-400: #8e8e93;
+  --im-neutral-500: #6e6e73;
+  --im-neutral-600: #48484a;
+  --im-neutral-700: #3a3a3c;
+  --im-neutral-800: #2c2c2e;
+  --im-neutral-900: #1c1c1e;
+
+  /* semantic state colors */
+  --state-success: #34c759;
+  --state-success-dark: #30d158;
+  --state-warning: #ff9f0a;
+  --state-error: #ff3b30;
+  --state-error-dark: #ff453a;
+  --state-info: #0a84ff;
+}
 
 /* ---------- Dark base (default) ---------- */
 :root {
-  --im-background: #0b0d12;
-  --im-foreground: #eaeef7;
-  --im-card: #12151d;
-  --im-card-foreground: #eaeef7;
-  --im-popover: #171b26;
-  --im-popover-foreground: #eaeef7;
-  --im-primary: #7c8cff;
-  --im-primary-foreground: #0b0d12;
-  --im-muted: #141824;
-  --im-muted-foreground: #8f98ac;
-  --im-border: #1e2330;
-  --im-input: #1e2330;
-  --im-ring: rgba(124, 140, 255, 0.45);
-  --im-radius-small: 4px;
-  --im-radius-medium: 8px;
-  --im-radius-large: 12px;
+  --im-background: #000000;
+  --im-foreground: #f5f5f7;
+  --im-card: #1c1c1e;
+  --im-card-foreground: #f5f5f7;
+  --im-popover: #3a3a3c;
+  --im-popover-foreground: #f5f5f7;
+  --im-primary: #2e8dff;
+  --im-primary-foreground: #ffffff;
+  --im-muted: #1c1c1e;
+  --im-muted-foreground: #8e8e93;
+  --im-accent: #2c2c2e;
+  --im-accent-foreground: #f5f5f7;
+  --im-border: #3a3a3c;
+  --im-input: #3a3a3c;
+  --im-ring: rgba(46, 141, 255, 0.5);
+  --im-radius-small: 8px;
+  --im-radius-medium: 14px;
+  --im-radius-large: 20px;
   --im-radius-full: 9999px;
 
-  /* brand primary scale (single hue: indigo) */
-  --im-primary-50: #eef0ff;
-  --im-primary-100: #e0e3ff;
-  --im-primary-200: #c6ccff;
-  --im-primary-300: #a6adff;
-  --im-primary-400: #8f98ff;
-  --im-primary-500: #7c8cff;
-  --im-primary-600: #636ef0;
-  --im-primary-700: #4d55d0;
-  --im-primary-800: #3f45a3;
-  --im-primary-900: #363b7e;
-
-  /* neutral scale (dark) */
-  --im-neutral-50: #f3f5fa;
-  --im-neutral-100: #e7eaf2;
-  --im-neutral-200: #c9cfdc;
-  --im-neutral-300: #9aa3b5;
-  --im-neutral-400: #6b7488;
-  --im-neutral-500: #4a5163;
-  --im-neutral-600: #323848;
-  --im-neutral-700: #242936;
-  --im-neutral-800: #1a1e28;
-  --im-neutral-900: #12151d;
-
-  /* semantic state colors */
-  --state-success: #3ddc97;
-  --state-warning: #f5b544;
-  --state-error: #f56565;
-  --state-info: #4aa8ff;
-
-  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --im-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.05);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Light alternative ---------- */
+/* ---------- Light alternative (Silver Mist family) ---------- */
 .light {
-  --im-background: #f6f7fb;
-  --im-foreground: #141824;
+  --im-background: #f5f5f7;
+  --im-foreground: #1d1d1f;
   --im-card: #ffffff;
-  --im-card-foreground: #141824;
+  --im-card-foreground: #1d1d1f;
   --im-popover: #ffffff;
-  --im-popover-foreground: #141824;
-  --im-primary: #5565e8;
+  --im-popover-foreground: #1d1d1f;
+  --im-primary: #007aff;
   --im-primary-foreground: #ffffff;
-  --im-muted: #eceef5;
-  --im-muted-foreground: #5b6478;
-  --im-border: #e3e7f0;
-  --im-input: #e3e7f0;
-  --im-ring: rgba(85, 101, 232, 0.35);
-  --im-shadow-sm: 0 1px 2px rgba(20, 24, 36, 0.04);
-  --im-shadow-md: 0 4px 14px rgba(20, 24, 36, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(20, 24, 36, 0.06);
+  --im-muted: #f2f2f7;
+  --im-muted-foreground: #6e6e73;
+  --im-accent: #f2f2f7;
+  --im-accent-foreground: #1d1d1f;
+  --im-border: #d1d1d6;
+  --im-input: #d1d1d6;
+  --im-ring: rgba(0, 122, 255, 0.35);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
 }
 
 /* ---------- Typography ---------- */
 .font-sans,
 body {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, -apple-system, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .font-display {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+}
+
 .text-hero {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .text-section {
-  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-  line-height: 1.25;
-  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -120,6 +137,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -127,13 +145,7 @@ body {
   color: var(--im-foreground);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-/* subtle ambient glow used by hero/cards */
-.ambient-glow {
-  background:
-    radial-gradient(60% 80% at 20% 10%, rgba(124, 140, 255, 0.16), transparent 60%),
-    radial-gradient(50% 70% at 90% 20%, rgba(124, 140, 255, 0.08), transparent 60%);
+  overflow-x: hidden;
 }
 
 .card-surface {
@@ -142,22 +154,121 @@ body {
   border-radius: var(--im-radius-large);
 }
 
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* ---------- Apple component primitives (responsive) ---------- */
+
+/* Pill button */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--im-radius-full);
+  background: var(--im-primary);
+  color: var(--im-primary-foreground);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter .18s ease, transform .18s ease, opacity .18s ease;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.btn-pill:hover { filter: brightness(.95); }
+.btn-pill:active { transform: scale(.98); }
+.btn-pill:disabled { opacity: .42; cursor: not-allowed; }
+
+/* Secondary pill */
+.btn-pill-secondary {
+  background: var(--im-muted);
+  color: var(--im-foreground);
+  border: 1px solid var(--im-border);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--im-neutral-700);
-  border-radius: 9999px;
-  border: 2px solid var(--im-background);
+.btn-pill-secondary:hover { filter: brightness(1.06); }
+
+/* Top nav item (Apple Store style) */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--im-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--im-muted-foreground);
+  transition: color .18s ease, background .18s ease;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--im-neutral-600);
+.nav-item:hover { color: var(--im-foreground); background: var(--im-accent); }
+.nav-item[data-active="true"] { color: var(--im-primary); background: color-mix(in srgb, var(--im-primary) 14%, transparent); }
+
+/* Mobile bottom tab bar (Apple-style, blur + safe-area) */
+.mobile-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-top: 1px solid var(--im-border);
+  background: color-mix(in srgb, var(--im-background) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
+.mobile-tabbar .mtab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--im-radius-medium);
+  color: var(--im-muted-foreground);
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.mobile-tabbar .mtab[data-active="true"] { color: var(--im-primary); }
+.mobile-tabbar .mtab i { width: 20px; height: 20px; }
+
+/* Hide top nav on mobile, show tab bar; hide tab bar on desktop */
+@media (max-width: 767px) {
+  .desktop-nav { display: none !important; }
+  .desktop-cta { display: none !important; }
+  .mobile-tabbar { display: flex; }
+}
+@media (min-width: 768px) {
+  .mobile-tabbar { display: none; }
+}
+
+/* Fluid container */
+.shell-main {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
+
+/* Responsive card grid helpers (fallback if Tailwind delayed) */
+.grid-auto-1 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Minimal scrollbar (quiet, Apple-like) */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--im-neutral-700); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--im-neutral-600); }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
@@ -174,6 +285,8 @@ body {
     --color-primary-foreground: var(--im-primary-foreground);
     --color-muted: var(--im-muted);
     --color-muted-foreground: var(--im-muted-foreground);
+    --color-accent: var(--im-accent);
+    --color-accent-foreground: var(--im-accent-foreground);
     --color-border: var(--im-border);
     --color-input: var(--im-input);
     --color-ring: var(--im-ring);
@@ -228,6 +341,14 @@ body {
       .text-muted-foreground { color: var(--im-muted-foreground); }
       .border-muted-foreground { border-color: var(--im-muted-foreground); }
       .ring-muted-foreground { --tw-ring-color: var(--im-muted-foreground); }
+      .bg-accent { background-color: var(--im-accent); }
+      .text-accent { color: var(--im-accent); }
+      .border-accent { border-color: var(--im-accent); }
+      .ring-accent { --tw-ring-color: var(--im-accent); }
+      .bg-accent-foreground { background-color: var(--im-accent-foreground); }
+      .text-accent-foreground { color: var(--im-accent-foreground); }
+      .border-accent-foreground { border-color: var(--im-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--im-accent-foreground); }
       .bg-border { background-color: var(--im-border); }
       .text-border { color: var(--im-border); }
       .border-border { border-color: var(--im-border); }
@@ -260,132 +381,373 @@ body {
 </head>
 <body class="min-h-screen font-sans antialiased">
   <style id="critical-layout">
+    /* ============================================================
+       博客创作 · 页面级关键布局（不依赖 Tailwind 也能正确渲染）
+       苹果动效曲线 cubic-bezier(0.32,0.72,0,1)，150-350ms
+       ============================================================ */
+
+    /* ---------- Shell ---------- */
     .shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column}
-    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 85%,transparent);backdrop-filter:blur(10px)}
-    .logo-mark{background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
-    .nav-item{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 12%,transparent)}
-    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .panel{background:var(--im-card);border:1px solid var(--im-border);border-radius:16px}
-    .field-label{display:block;font-size:12px;font-weight:600;color:var(--im-foreground);margin-bottom:8px}
-    .input{width:100%;height:44px;border-radius:10px;border:1px solid var(--im-border);background:var(--im-card);color:var(--im-foreground);padding:0 14px;font-size:14px;transition:border-color .16s ease,box-shadow .16s ease}
-    .input:focus{outline:none;border-color:var(--im-primary);box-shadow:0 0 0 2px var(--im-ring)}
-    .textarea{width:100%;min-height:420px;border-radius:0 0 10px 10px;border:1px solid var(--im-border);border-top:0;background:var(--im-card);color:var(--im-foreground);padding:14px 16px;font-size:14px;line-height:1.8;resize:vertical}
-    .textarea:focus{outline:none;border-color:var(--im-primary)}
-    .chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--im-border);background:var(--im-card);color:var(--im-muted-foreground);font-size:13px;transition:all .16s ease}
-    .chip[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 14%,transparent);border-color:var(--im-primary);color:var(--im-primary)}
-    .toolbar-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;color:var(--im-muted-foreground)}
-    .toolbar-btn:hover{background:color-mix(in srgb,var(--im-primary) 8%,transparent);color:var(--im-foreground)}
-    .pick{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--im-border);transition:border-color .16s ease}
-    .pick img{width:100%;height:100%;object-fit:cover}
-    .pick[data-active="true"]{border-color:var(--im-primary);box-shadow:0 0 0 2px var(--im-ring)}
-    .pick .check{position:absolute;top:6px;right:6px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:999px;background:var(--im-primary);color:var(--im-primary-foreground)}
-    .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;width:100%;border-radius:10px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
-    .btn-primary:hover{transform:translateY(-1px);opacity:.94}
-    .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;border-radius:10px;border:1px solid var(--im-border);color:var(--im-foreground);font-size:14px;font-weight:500;transition:border-color .16s ease}
-    .btn-secondary:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border))}
-    .post-item{display:flex;align-items:center;gap:10px;width:100%;border-radius:10px;padding:9px 10px;text-align:left;color:var(--im-muted-foreground);transition:background .16s ease}
-    .post-item:hover{background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .post-item[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-foreground)}
-    .conn-dot{width:8px;height:8px;border-radius:999px;background:var(--im-neutral-600);flex-shrink:0}
+
+    /* ---------- Apple Store 式深色顶栏（44px） ---------- */
+    .site-header{
+      position:sticky;top:0;z-index:40;width:100%;height:44px;
+      border-bottom:1px solid var(--im-border);
+      background:color-mix(in srgb,var(--im-background) 72%,transparent);
+      backdrop-filter:blur(20px) saturate(180%);
+      -webkit-backdrop-filter:blur(20px) saturate(180%);
+    }
+    .header-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      width:100%;max-width:1152px;height:44px;margin:0 auto;
+      padding-left:clamp(12px,3vw,24px);padding-right:clamp(12px,3vw,24px);
+    }
+    .logo-mark{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;border-radius:8px;background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
+    .logo-mark-sm{width:24px;height:24px}
+    .desktop-nav{display:flex;align-items:center;gap:2px;min-width:0}
+    .desktop-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .nav-item{
+      display:inline-flex;align-items:center;height:34px;padding:0 14px;
+      border-radius:9999px;font-size:13px;font-weight:500;white-space:nowrap;
+      color:var(--im-muted-foreground);
+      transition:color .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1);
+    }
+    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 10%,transparent)}
+    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 14%,transparent)}
+    .conn-pill{
+      display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;
+      border-radius:9999px;border:1px solid var(--im-border);
+      font-size:12px;color:var(--im-muted-foreground);white-space:nowrap;
+    }
+    .conn-dot{width:8px;height:8px;border-radius:9999px;background:var(--im-neutral-600);flex-shrink:0}
     .conn-dot[data-connected="true"]{background:var(--state-success)}
-    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);z-index:60;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;background:var(--im-popover);border:1px solid var(--im-border);box-shadow:var(--im-shadow-lg);opacity:0;transition:opacity .2s ease,transform .2s ease;pointer-events:none;max-width:80vw;text-align:center}
+    .icon-btn{
+      display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+      border-radius:9999px;color:var(--im-muted-foreground);
+      transition:color .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1);
+    }
+    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 10%,transparent)}
+
+    /* ---------- 移动端底部 Tab Bar（显示/隐藏逻辑由 head 接管，这里仅复述关键样式） ---------- */
+    .mobile-tabbar{
+      position:fixed;left:0;right:0;bottom:0;z-index:50;height:64px;
+      padding-bottom:env(safe-area-inset-bottom,0);
+      border-top:1px solid var(--im-border);
+      background:color-mix(in srgb,var(--im-background) 82%,transparent);
+      backdrop-filter:blur(20px) saturate(180%);
+      -webkit-backdrop-filter:blur(20px) saturate(180%);
+    }
+    .mobile-tabbar .mtab{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+      min-width:44px;min-height:44px;padding:6px 12px;border-radius:14px;
+      color:var(--im-muted-foreground);font-size:10px;font-weight:500;text-decoration:none;
+      transition:color .25s cubic-bezier(.32,.72,0,1),transform .2s cubic-bezier(.32,.72,0,1);
+    }
+    .mobile-tabbar .mtab:active{transform:scale(.92)}
+    .mobile-tabbar .mtab[data-active="true"]{color:var(--im-primary)}
+    .mobile-tabbar .mtab i{width:20px;height:20px}
+
+    /* ---------- 页面主容器（流式宽度 + 自适应内边距） ---------- */
+    .shell-main{width:100%;max-width:1152px;margin:0 auto;padding-left:clamp(16px,4vw,32px);padding-right:clamp(16px,4vw,32px)}
+    .editor-page-main{
+      flex:1 0 auto;width:100%;
+      padding-top:clamp(18px,3vw,32px);
+      padding-bottom:calc(104px + env(safe-area-inset-bottom,0px));
+    }
+    @media (min-width:768px){ .editor-page-main{padding-bottom:48px} }
+
+    /* ---------- 三栏编辑器网格（响应式重排） ---------- */
+    .editor-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      grid-template-areas:"editor" "list" "settings";
+      gap:clamp(16px,2.5vw,24px);
+      align-items:start;
+    }
+    .aside-list{grid-area:list;min-width:0}
+    .editor-col{grid-area:editor;min-width:0}
+    .aside-settings{grid-area:settings;min-width:0}
+
+    /* 平板 768-1023：左列表 + 右编辑器，发布设置移到下方整行 */
+    @media (min-width:768px){
+      .editor-grid{
+        grid-template-columns:minmax(0,240px) minmax(0,1fr);
+        grid-template-areas:"list editor" "settings settings";
+      }
+    }
+    /* 桌面 ≥1024：三栏 */
+    @media (min-width:1024px){
+      .editor-grid{
+        grid-template-columns:minmax(0,240px) minmax(0,1fr) minmax(0,300px);
+        grid-template-areas:"list editor settings";
+      }
+    }
+
+    /* ---------- 面板（大圆角 20px，1px 边框，轻声阴影） ---------- */
+    .panel{
+      background:var(--im-card);
+      border:1px solid var(--im-border);
+      border-radius:var(--im-radius-large);
+      box-shadow:var(--im-shadow-sm);
+      transition:box-shadow .3s cubic-bezier(.32,.72,0,1);
+    }
+
+    /* ---------- 文章列表 ---------- */
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 16px 10px}
+    .panel-title{font-size:14px;font-weight:600;letter-spacing:-.01em}
+    .list-scroll{display:flex;flex-direction:column;gap:4px;padding:2px 10px 14px;max-height:340px;overflow-y:auto;overscroll-behavior:contain}
+    @media (min-width:768px){ .list-scroll{max-height:calc(100vh - 176px)} }
+    .post-item{
+      display:flex;align-items:center;gap:10px;width:100%;min-height:42px;
+      border-radius:var(--im-radius-medium);padding:8px 12px;text-align:left;
+      color:var(--im-muted-foreground);cursor:pointer;border:none;background:transparent;
+      transition:background .22s cubic-bezier(.32,.72,0,1),color .22s cubic-bezier(.32,.72,0,1);
+    }
+    .post-item:hover{background:color-mix(in srgb,var(--im-primary) 9%,transparent)}
+    .post-item[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 15%,transparent);color:var(--im-foreground)}
+    .post-item i{flex-shrink:0}
+    .post-item .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .btn-new{
+      display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+      border-radius:9999px;border:none;background:var(--im-primary);color:var(--im-primary-foreground);
+      cursor:pointer;flex-shrink:0;
+      transition:transform .22s cubic-bezier(.32,.72,0,1),opacity .22s cubic-bezier(.32,.72,0,1);
+    }
+    .btn-new:hover{opacity:.92;transform:scale(1.05)}
+    .btn-new:active{transform:scale(.94)}
+
+    /* ---------- 编辑器（标题 / 副标题 / 工具栏 / 正文） ---------- */
+    .editor-col:focus-within{box-shadow:0 0 0 3px var(--im-ring),var(--im-shadow-sm)}
+    .editor-title{
+      display:block;width:100%;height:clamp(54px,7vh,64px);padding:0 clamp(16px,2.5vw,24px);
+      background:transparent;border:none;border-bottom:1px solid var(--im-border);
+      color:var(--im-foreground);font-size:clamp(16px,2vw,20px);font-weight:600;letter-spacing:-.01em;
+      transition:border-color .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1);
+    }
+    .editor-title::placeholder{color:var(--im-muted-foreground)}
+    .editor-title:focus{outline:none;border-bottom-color:var(--im-primary)}
+    .editor-subtitle{
+      display:block;width:100%;height:46px;padding:0 clamp(16px,2.5vw,24px);
+      background:transparent;border:none;border-bottom:1px solid var(--im-border);
+      color:var(--im-muted-foreground);font-size:14px;
+      transition:border-color .25s cubic-bezier(.32,.72,0,1);
+    }
+    .editor-subtitle::placeholder{color:var(--im-muted-foreground);opacity:.7}
+    .editor-subtitle:focus{outline:none;border-bottom-color:var(--im-primary)}
+    .editor-toolbar{
+      display:flex;align-items:center;gap:4px;padding:10px clamp(12px,2vw,16px);
+      border-bottom:1px solid var(--im-border);background:var(--im-accent);
+      overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .editor-toolbar::-webkit-scrollbar{display:none}
+    .toolbar-btn{
+      display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+      width:36px;height:36px;border-radius:var(--im-radius-medium);
+      color:var(--im-muted-foreground);
+      transition:color .22s cubic-bezier(.32,.72,0,1),background .22s cubic-bezier(.32,.72,0,1),transform .2s cubic-bezier(.32,.72,0,1);
+    }
+    .toolbar-btn:hover{background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-foreground)}
+    .toolbar-btn:active{transform:scale(.94)}
+    .toolbar-hint{margin-left:auto;flex-shrink:0;font-size:12px;color:var(--im-muted-foreground);white-space:nowrap}
+    @media (max-width:640px){ .toolbar-hint{display:none} }
+    .editor-content{
+      display:block;width:100%;min-height:clamp(280px,46vh,520px);
+      padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);
+      background:transparent;border:none;resize:vertical;
+      color:var(--im-foreground);font-size:14px;line-height:1.85;
+      overflow-wrap:break-word;
+    }
+    .editor-content::placeholder{color:var(--im-muted-foreground)}
+    .editor-content:focus{outline:none}
+
+    /* ---------- 发布设置 ---------- */
+    .settings-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+    @media (min-width:768px) and (max-width:1023px){
+      .settings-stack{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .settings-stack .span-2{grid-column:1 / -1}
+    }
+    .settings-card{padding:clamp(16px,2.5vw,20px)}
+    .field-label{display:block;font-size:12px;font-weight:600;color:var(--im-foreground);margin-bottom:10px;letter-spacing:.01em}
+    .input{
+      width:100%;height:46px;border-radius:var(--im-radius-medium);
+      border:1px solid var(--im-border);background:var(--im-card);color:var(--im-foreground);
+      padding:0 14px;font-size:14px;
+      transition:border-color .25s cubic-bezier(.32,.72,0,1),box-shadow .25s cubic-bezier(.32,.72,0,1);
+    }
+    .input::placeholder{color:var(--im-muted-foreground)}
+    .input:focus{outline:none;border-color:var(--im-primary);box-shadow:0 0 0 3px var(--im-ring)}
+    .note{font-size:12px;line-height:1.7;color:var(--im-muted-foreground);margin:10px 0 14px;overflow-wrap:break-word}
+    .note code{
+      font-family:'JetBrains Mono',ui-monospace,'SF Mono',monospace;font-size:11px;
+      border-radius:6px;background:var(--im-muted);padding:2px 6px;color:var(--im-foreground);
+      border:1px solid var(--im-border);
+    }
+    .chip-wrap{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;
+      border-radius:9999px;border:1px solid var(--im-border);background:var(--im-card);
+      color:var(--im-muted-foreground);font-size:13px;cursor:pointer;white-space:nowrap;
+      transition:all .22s cubic-bezier(.32,.72,0,1);
+    }
+    .chip:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border));color:var(--im-foreground)}
+    .chip[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 14%,transparent);border-color:var(--im-primary);color:var(--im-primary)}
+    .cover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .pick{
+      position:relative;aspect-ratio:16/9;border-radius:var(--im-radius-medium);overflow:hidden;
+      border:1px solid var(--im-border);background:var(--im-muted);cursor:pointer;padding:0;
+      transition:border-color .22s cubic-bezier(.32,.72,0,1),box-shadow .22s cubic-bezier(.32,.72,0,1),transform .22s cubic-bezier(.32,.72,0,1);
+    }
+    .pick img{width:100%;height:100%;object-fit:cover;display:block}
+    .pick:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border))}
+    .pick[data-active="true"]{border-color:var(--im-primary);box-shadow:0 0 0 2px var(--im-ring)}
+    .pick .check{
+      position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;
+      width:22px;height:22px;border-radius:9999px;background:var(--im-primary);color:var(--im-primary-foreground);
+      box-shadow:var(--im-shadow-sm);
+    }
+    .actions-row{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+    @media (min-width:768px) and (max-width:1023px){ .actions-row{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    .btn-primary{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;min-height:48px;padding:0 22px;border-radius:9999px;border:none;
+      background:var(--im-primary);color:var(--im-primary-foreground);
+      font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;
+      transition:transform .22s cubic-bezier(.32,.72,0,1),opacity .22s cubic-bezier(.32,.72,0,1),box-shadow .22s cubic-bezier(.32,.72,0,1);
+    }
+    .btn-primary:hover{opacity:.94;box-shadow:var(--im-shadow-md)}
+    .btn-primary:active{transform:scale(.98)}
+    .btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+    .btn-secondary{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;min-height:44px;padding:0 20px;border-radius:9999px;
+      border:1px solid var(--im-border);background:var(--im-card);color:var(--im-foreground);
+      font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;
+      transition:border-color .22s cubic-bezier(.32,.72,0,1),background .22s cubic-bezier(.32,.72,0,1),transform .22s cubic-bezier(.32,.72,0,1);
+    }
+    .btn-secondary:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border));background:var(--im-accent)}
+    .btn-secondary:active{transform:scale(.98)}
+    .btn-secondary:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+    /* ---------- Toast ---------- */
+    .toast{
+      position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);
+      z-index:60;padding:12px 20px;border-radius:9999px;
+      font-size:13px;font-weight:500;text-align:center;max-width:80vw;
+      background:var(--im-popover);border:1px solid var(--im-border);box-shadow:var(--im-shadow-lg);
+      opacity:0;pointer-events:none;
+      transition:opacity .3s cubic-bezier(.32,.72,0,1),transform .3s cubic-bezier(.32,.72,0,1);
+    }
     .toast[data-show="true"]{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media (max-width:767px){ .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))} }
+
+    /* ---------- 页脚 ---------- */
+    .site-footer{width:100%;border-top:1px solid var(--im-border);background:var(--im-background)}
+    .footer-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      width:100%;max-width:1152px;margin:0 auto;padding:24px clamp(16px,4vw,32px);
+    }
+
+    /* ---------- 移动端字号（≥16px，避免 iOS 聚焦缩放） ---------- */
+    @media (max-width:767px){
+      .input,.editor-title,.editor-subtitle,.editor-content{font-size:16px}
+      .list-scroll{max-height:320px}
+    }
   </style>
 
   <div class="shell-root">
+    <!-- Apple Store 式深色顶栏（44px） -->
     <header class="site-header">
-      <div class="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-6">
-        <a href="index.html" class="flex min-w-0 items-center gap-2.5" aria-label="Im-chc 首页">
-          <span class="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg">
-            <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
+      <div class="header-inner">
+        <a href="index.html" class="flex min-w-0 items-center gap-2" aria-label="Im-chc 首页">
+          <span class="logo-mark">
+            <i data-lucide="sparkles" class="h-4 w-4"></i>
           </span>
-          <span class="font-display truncate text-lg font-bold tracking-tight">Im-chc</span>
+          <span class="font-display truncate text-sm font-bold tracking-tight">Im-chc</span>
         </a>
-        <nav class="flex items-center gap-1" aria-label="主导航">
+        <nav class="desktop-nav" aria-label="主导航">
           <a href="index.html" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
           <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
           <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
           <a href="blog.html" data-nav-key="blog" data-active="true" class="nav-item">博客创作</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <span class="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"><span class="conn-dot" id="conn-dot"></span><span id="conn-label">未连接</span></span>
-          <button type="button" class="icon-btn" aria-label="设置"><i data-lucide="settings" class="h-[18px] w-[18px]"></i></button>
+        <div class="desktop-cta">
+          <span class="conn-pill"><span class="conn-dot" id="conn-dot"></span><span id="conn-label">未连接</span></span>
+          <button type="button" class="icon-btn" aria-label="设置"><i data-lucide="settings" class="h-4 w-4"></i></button>
         </div>
       </div>
     </header>
 
-    <main class="w-full max-w-7xl self-center px-6 pb-6 pt-6">
-      <div class="grid gap-5 lg:grid-cols-[250px_1fr_300px]">
+    <main class="shell-main editor-page-main">
+      <div class="editor-grid">
         <!-- 左侧：文章列表 -->
-        <aside class="panel flex flex-col p-3" aria-label="文章列表">
-          <div class="mb-2 flex items-center justify-between px-2 py-1">
-            <span class="text-sm font-semibold">我的文章</span>
-            <button type="button" id="btn-new" class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" aria-label="新建文章"><i data-lucide="plus" class="h-4 w-4"></i></button>
+        <aside class="panel aside-list" aria-label="文章列表">
+          <div class="panel-head">
+            <span class="panel-title">我的文章</span>
+            <button type="button" id="btn-new" class="btn-new" aria-label="新建文章"><i data-lucide="plus" class="h-4 w-4"></i></button>
           </div>
-          <div class="flex flex-col gap-1" id="post-list"><!-- 动态渲染 --></div>
+          <div class="list-scroll" id="post-list"><!-- 动态渲染 --></div>
         </aside>
 
         <!-- 中间：编辑器 -->
-        <section class="panel overflow-hidden" aria-label="编辑器">
-          <input class="input !h-[58px] rounded-none border-l-0 border-r-0 border-t-0 text-base font-semibold" id="title-input" type="text" placeholder="文章标题">
-          <input class="input !h-[44px] rounded-none border-l-0 border-r-0 border-t-0 text-sm text-muted-foreground" id="subtitle-input" type="text" placeholder="一句话副标题">
-          <div class="flex items-center gap-1 border-b border-border bg-muted px-3 py-2">
+        <section class="panel editor-col" aria-label="编辑器">
+          <input class="editor-title" id="title-input" type="text" placeholder="文章标题">
+          <input class="editor-subtitle" id="subtitle-input" type="text" placeholder="一句话副标题">
+          <div class="editor-toolbar" role="toolbar" aria-label="格式工具栏">
             <button type="button" class="toolbar-btn" data-md="bold" aria-label="加粗"><i data-lucide="bold" class="h-4 w-4"></i></button>
             <button type="button" class="toolbar-btn" data-md="italic" aria-label="斜体"><i data-lucide="italic" class="h-4 w-4"></i></button>
             <button type="button" class="toolbar-btn" data-md="h2" aria-label="二级标题"><i data-lucide="heading-2" class="h-4 w-4"></i></button>
             <button type="button" class="toolbar-btn" data-md="quote" aria-label="引用"><i data-lucide="quote" class="h-4 w-4"></i></button>
-            <span class="ml-auto text-xs text-muted-foreground">Markdown · ## 标题 / > 引用</span>
+            <span class="toolbar-hint">Markdown · ## 标题 / > 引用</span>
           </div>
-          <textarea class="textarea" id="content-input" aria-label="正文" placeholder="支持 Markdown：## 章节标题、> 引用、段落"></textarea>
+          <textarea class="editor-content" id="content-input" aria-label="正文" placeholder="支持 Markdown：## 章节标题、> 引用、段落"></textarea>
         </section>
 
-        <!-- 右侧：发布设置 + 仓库连接 -->
-        <aside class="flex flex-col gap-5" aria-label="发布设置">
-          <section class="panel p-4">
-            <span class="field-label">GitHub 连接</span>
-            <input class="input mb-2" id="token-input" type="password" placeholder="粘贴 GitHub Token（ghp_ / github_pat_）">
-            <p class="mb-3 text-xs leading-relaxed text-muted-foreground">需要具备仓库 <code class="rounded bg-muted px-1 py-0.5">contents:write</code> 权限的 Token，仅保存在本机浏览器。</p>
-            <button type="button" id="btn-connect" class="btn-secondary w-full"><i data-lucide="plug" class="h-4 w-4"></i>连接并加载</button>
-          </section>
+        <!-- 右侧：发布设置 + GitHub 连接 -->
+        <aside class="aside-settings" aria-label="发布设置">
+          <div class="settings-stack">
+            <section class="panel settings-card">
+              <span class="field-label">GitHub 连接</span>
+              <input class="input" id="token-input" type="password" placeholder="粘贴 GitHub Token（ghp_ / github_pat_）">
+              <p class="note">需要具备仓库 <code class="font-mono">contents:write</code> 权限的 Token，仅保存在本机浏览器。</p>
+              <button type="button" id="btn-connect" class="btn-secondary"><i data-lucide="plug" class="h-4 w-4"></i>连接并加载</button>
+            </section>
 
-          <section class="panel p-4">
-            <span class="field-label">归类标签</span>
-            <div class="flex flex-wrap gap-2" id="cat-chips">
-              <button type="button" data-cat="电影" class="chip"><i data-lucide="clapperboard" class="h-3.5 w-3.5"></i>电影</button>
-              <button type="button" data-cat="音乐" class="chip"><i data-lucide="disc" class="h-3.5 w-3.5"></i>音乐</button>
-              <button type="button" data-cat="旅行" class="chip"><i data-lucide="compass" class="h-3.5 w-3.5"></i>旅行</button>
-              <button type="button" data-cat="美食" class="chip"><i data-lucide="utensils" class="h-3.5 w-3.5"></i>美食</button>
+            <section class="panel settings-card">
+              <span class="field-label">归类标签</span>
+              <div class="chip-wrap" id="cat-chips">
+                <button type="button" data-cat="电影" class="chip"><i data-lucide="clapperboard" class="h-3.5 w-3.5"></i>电影</button>
+                <button type="button" data-cat="音乐" class="chip"><i data-lucide="disc" class="h-3.5 w-3.5"></i>音乐</button>
+                <button type="button" data-cat="旅行" class="chip"><i data-lucide="compass" class="h-3.5 w-3.5"></i>旅行</button>
+                <button type="button" data-cat="美食" class="chip"><i data-lucide="utensils" class="h-3.5 w-3.5"></i>美食</button>
+              </div>
+            </section>
+
+            <section class="panel settings-card span-2">
+              <span class="field-label">封面图</span>
+              <div class="cover-grid" id="cover-picks">
+                <button type="button" data-cover="assets/carousel-morning.svg" class="pick" aria-label="选择雾山晨景"><img src="assets/carousel-morning.svg" alt="雾山晨景"></button>
+                <button type="button" data-cover="assets/carousel-night.svg" class="pick" aria-label="选择城市夜景"><img src="assets/carousel-night.svg" alt="城市夜景"></button>
+                <button type="button" data-cover="assets/carousel-mountain.svg" class="pick" aria-label="选择雪山峰峦"><img src="assets/carousel-mountain.svg" alt="雪山峰峦"></button>
+                <button type="button" data-cover="assets/category-food.svg" class="pick" aria-label="选择美食"><img src="assets/category-food.svg" alt="美食"></button>
+                <button type="button" data-cover="assets/category-music.svg" class="pick" aria-label="选择音乐"><img src="assets/category-music.svg" alt="音乐"></button>
+                <button type="button" data-cover="assets/category-cinema.svg" class="pick" aria-label="选择电影"><img src="assets/category-cinema.svg" alt="电影"></button>
+              </div>
+            </section>
+
+            <div class="actions-row span-2">
+              <button type="button" id="btn-publish" class="btn-primary" disabled><i data-lucide="send" class="h-4 w-4"></i>发布并同步到仓库</button>
+              <button type="button" id="btn-delete" class="btn-secondary" disabled><i data-lucide="trash-2" class="h-4 w-4"></i>删除当前文章</button>
             </div>
-          </section>
-
-          <section class="panel p-4">
-            <span class="field-label">封面图</span>
-            <div class="grid grid-cols-3 gap-2" id="cover-picks">
-              <button type="button" data-cover="assets/carousel-morning.svg" class="pick" aria-label="选择雾山晨景"><img src="assets/carousel-morning.svg" alt="雾山晨景"></button>
-              <button type="button" data-cover="assets/carousel-night.svg" class="pick" aria-label="选择城市夜景"><img src="assets/carousel-night.svg" alt="城市夜景"></button>
-              <button type="button" data-cover="assets/carousel-mountain.svg" class="pick" aria-label="选择雪山峰峦"><img src="assets/carousel-mountain.svg" alt="雪山峰峦"></button>
-              <button type="button" data-cover="assets/category-food.svg" class="pick" aria-label="选择美食"><img src="assets/category-food.svg" alt="美食"></button>
-              <button type="button" data-cover="assets/category-music.svg" class="pick" aria-label="选择音乐"><img src="assets/category-music.svg" alt="音乐"></button>
-              <button type="button" data-cover="assets/category-cinema.svg" class="pick" aria-label="选择电影"><img src="assets/category-cinema.svg" alt="电影"></button>
-            </div>
-          </section>
-
-          <div class="flex flex-col gap-2">
-            <button type="button" id="btn-publish" class="btn-primary" disabled><i data-lucide="send" class="h-4 w-4"></i>发布并同步到仓库</button>
-            <button type="button" id="btn-delete" class="btn-secondary" disabled><i data-lucide="trash-2" class="h-4 w-4"></i>删除当前文章</button>
           </div>
         </aside>
       </div>
     </main>
 
-    <footer class="w-full border-t border-border bg-background">
-      <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-8">
-        <div class="flex items-center gap-2.5">
-          <span class="logo-mark flex h-7 w-7 items-center justify-center rounded-md">
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="flex items-center gap-2">
+          <span class="logo-mark logo-mark-sm">
             <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
           </span>
           <span class="font-display text-sm font-semibold">Im-chc 个人博客</span>
@@ -394,6 +756,14 @@ body {
       </div>
     </footer>
   </div>
+
+  <!-- 移动端底部 Tab Bar -->
+  <nav class="mobile-tabbar" aria-label="移动端导航">
+    <a href="index.html" class="mtab" data-nav-key="home"><i data-lucide="house"></i><span>首页</span></a>
+    <a href="life.html" class="mtab" data-nav-key="life"><i data-lucide="camera"></i><span>人生时刻</span></a>
+    <a href="category.html" class="mtab" data-nav-key="category"><i data-lucide="layout-grid"></i><span>分类点评</span></a>
+    <a href="blog.html" class="mtab" data-nav-key="blog" data-active="true"><i data-lucide="pen-line"></i><span>博客创作</span></a>
+  </nav>
 
   <div class="toast" id="toast" role="status"></div>
 

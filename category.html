@@ -6,109 +6,126 @@
     <title>分类点评</title>
     <style id="theme-vars">
 /* ============================================================
-   Im-chc 个人博客 · 深色简约现代主题
+   Im-chc 个人博客 · 苹果风格响应式主题（草稿版）
    brand prefix: im
+   参考设计系统: Pinguo / Apple HIG
+   要点: Space Black + Silver Mist + System Blue，DM Sans 正文、
+   JetBrains Mono 技术字，1px 边框 + 轻声阴影，胶囊按钮，
+   大圆角，留白优先；全设备响应式（390/768/1024/1440）。
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Apple System Palette ---------- */
+:root {
+  /* brand blue scale (System Blue #007AFF anchored) */
+  --im-primary-50: #e8f2ff;
+  --im-primary-100: #cfe5ff;
+  --im-primary-200: #9fcbff;
+  --im-primary-300: #66abff;
+  --im-primary-400: #2e8dff;
+  --im-primary-500: #007aff;
+  --im-primary-600: #0064d6;
+  --im-primary-700: #004fad;
+  --im-primary-800: #003b82;
+  --im-primary-900: #00275a;
+
+  /* neutral scale (dark: Space Black family) */
+  --im-neutral-50: #f5f5f7;
+  --im-neutral-100: #e3e3e8;
+  --im-neutral-200: #c7c7cc;
+  --im-neutral-300: #aeaeb2;
+  --im-neutral-400: #8e8e93;
+  --im-neutral-500: #6e6e73;
+  --im-neutral-600: #48484a;
+  --im-neutral-700: #3a3a3c;
+  --im-neutral-800: #2c2c2e;
+  --im-neutral-900: #1c1c1e;
+
+  /* semantic state colors */
+  --state-success: #34c759;
+  --state-success-dark: #30d158;
+  --state-warning: #ff9f0a;
+  --state-error: #ff3b30;
+  --state-error-dark: #ff453a;
+  --state-info: #0a84ff;
+}
 
 /* ---------- Dark base (default) ---------- */
 :root {
-  --im-background: #0b0d12;
-  --im-foreground: #eaeef7;
-  --im-card: #12151d;
-  --im-card-foreground: #eaeef7;
-  --im-popover: #171b26;
-  --im-popover-foreground: #eaeef7;
-  --im-primary: #7c8cff;
-  --im-primary-foreground: #0b0d12;
-  --im-muted: #141824;
-  --im-muted-foreground: #8f98ac;
-  --im-border: #1e2330;
-  --im-input: #1e2330;
-  --im-ring: rgba(124, 140, 255, 0.45);
-  --im-radius-small: 4px;
-  --im-radius-medium: 8px;
-  --im-radius-large: 12px;
+  --im-background: #000000;
+  --im-foreground: #f5f5f7;
+  --im-card: #1c1c1e;
+  --im-card-foreground: #f5f5f7;
+  --im-popover: #3a3a3c;
+  --im-popover-foreground: #f5f5f7;
+  --im-primary: #2e8dff;
+  --im-primary-foreground: #ffffff;
+  --im-muted: #1c1c1e;
+  --im-muted-foreground: #8e8e93;
+  --im-accent: #2c2c2e;
+  --im-accent-foreground: #f5f5f7;
+  --im-border: #3a3a3c;
+  --im-input: #3a3a3c;
+  --im-ring: rgba(46, 141, 255, 0.5);
+  --im-radius-small: 8px;
+  --im-radius-medium: 14px;
+  --im-radius-large: 20px;
   --im-radius-full: 9999px;
 
-  /* brand primary scale (single hue: indigo) */
-  --im-primary-50: #eef0ff;
-  --im-primary-100: #e0e3ff;
-  --im-primary-200: #c6ccff;
-  --im-primary-300: #a6adff;
-  --im-primary-400: #8f98ff;
-  --im-primary-500: #7c8cff;
-  --im-primary-600: #636ef0;
-  --im-primary-700: #4d55d0;
-  --im-primary-800: #3f45a3;
-  --im-primary-900: #363b7e;
-
-  /* neutral scale (dark) */
-  --im-neutral-50: #f3f5fa;
-  --im-neutral-100: #e7eaf2;
-  --im-neutral-200: #c9cfdc;
-  --im-neutral-300: #9aa3b5;
-  --im-neutral-400: #6b7488;
-  --im-neutral-500: #4a5163;
-  --im-neutral-600: #323848;
-  --im-neutral-700: #242936;
-  --im-neutral-800: #1a1e28;
-  --im-neutral-900: #12151d;
-
-  /* semantic state colors */
-  --state-success: #3ddc97;
-  --state-warning: #f5b544;
-  --state-error: #f56565;
-  --state-info: #4aa8ff;
-
-  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --im-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.05);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Light alternative ---------- */
+/* ---------- Light alternative (Silver Mist family) ---------- */
 .light {
-  --im-background: #f6f7fb;
-  --im-foreground: #141824;
+  --im-background: #f5f5f7;
+  --im-foreground: #1d1d1f;
   --im-card: #ffffff;
-  --im-card-foreground: #141824;
+  --im-card-foreground: #1d1d1f;
   --im-popover: #ffffff;
-  --im-popover-foreground: #141824;
-  --im-primary: #5565e8;
+  --im-popover-foreground: #1d1d1f;
+  --im-primary: #007aff;
   --im-primary-foreground: #ffffff;
-  --im-muted: #eceef5;
-  --im-muted-foreground: #5b6478;
-  --im-border: #e3e7f0;
-  --im-input: #e3e7f0;
-  --im-ring: rgba(85, 101, 232, 0.35);
-  --im-shadow-sm: 0 1px 2px rgba(20, 24, 36, 0.04);
-  --im-shadow-md: 0 4px 14px rgba(20, 24, 36, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(20, 24, 36, 0.06);
+  --im-muted: #f2f2f7;
+  --im-muted-foreground: #6e6e73;
+  --im-accent: #f2f2f7;
+  --im-accent-foreground: #1d1d1f;
+  --im-border: #d1d1d6;
+  --im-input: #d1d1d6;
+  --im-ring: rgba(0, 122, 255, 0.35);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
 }
 
 /* ---------- Typography ---------- */
 .font-sans,
 body {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, -apple-system, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .font-display {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+}
+
 .text-hero {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .text-section {
-  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-  line-height: 1.25;
-  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -120,6 +137,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -127,13 +145,7 @@ body {
   color: var(--im-foreground);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-/* subtle ambient glow used by hero/cards */
-.ambient-glow {
-  background:
-    radial-gradient(60% 80% at 20% 10%, rgba(124, 140, 255, 0.16), transparent 60%),
-    radial-gradient(50% 70% at 90% 20%, rgba(124, 140, 255, 0.08), transparent 60%);
+  overflow-x: hidden;
 }
 
 .card-surface {
@@ -142,22 +154,121 @@ body {
   border-radius: var(--im-radius-large);
 }
 
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* ---------- Apple component primitives (responsive) ---------- */
+
+/* Pill button */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--im-radius-full);
+  background: var(--im-primary);
+  color: var(--im-primary-foreground);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter .18s ease, transform .18s ease, opacity .18s ease;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.btn-pill:hover { filter: brightness(.95); }
+.btn-pill:active { transform: scale(.98); }
+.btn-pill:disabled { opacity: .42; cursor: not-allowed; }
+
+/* Secondary pill */
+.btn-pill-secondary {
+  background: var(--im-muted);
+  color: var(--im-foreground);
+  border: 1px solid var(--im-border);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--im-neutral-700);
-  border-radius: 9999px;
-  border: 2px solid var(--im-background);
+.btn-pill-secondary:hover { filter: brightness(1.06); }
+
+/* Top nav item (Apple Store style) */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--im-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--im-muted-foreground);
+  transition: color .18s ease, background .18s ease;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--im-neutral-600);
+.nav-item:hover { color: var(--im-foreground); background: var(--im-accent); }
+.nav-item[data-active="true"] { color: var(--im-primary); background: color-mix(in srgb, var(--im-primary) 14%, transparent); }
+
+/* Mobile bottom tab bar (Apple-style, blur + safe-area) */
+.mobile-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-top: 1px solid var(--im-border);
+  background: color-mix(in srgb, var(--im-background) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
+.mobile-tabbar .mtab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--im-radius-medium);
+  color: var(--im-muted-foreground);
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.mobile-tabbar .mtab[data-active="true"] { color: var(--im-primary); }
+.mobile-tabbar .mtab i { width: 20px; height: 20px; }
+
+/* Hide top nav on mobile, show tab bar; hide tab bar on desktop */
+@media (max-width: 767px) {
+  .desktop-nav { display: none !important; }
+  .desktop-cta { display: none !important; }
+  .mobile-tabbar { display: flex; }
+}
+@media (min-width: 768px) {
+  .mobile-tabbar { display: none; }
+}
+
+/* Fluid container */
+.shell-main {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
+
+/* Responsive card grid helpers (fallback if Tailwind delayed) */
+.grid-auto-1 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Minimal scrollbar (quiet, Apple-like) */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--im-neutral-700); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--im-neutral-600); }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
@@ -174,6 +285,8 @@ body {
     --color-primary-foreground: var(--im-primary-foreground);
     --color-muted: var(--im-muted);
     --color-muted-foreground: var(--im-muted-foreground);
+    --color-accent: var(--im-accent);
+    --color-accent-foreground: var(--im-accent-foreground);
     --color-border: var(--im-border);
     --color-input: var(--im-input);
     --color-ring: var(--im-ring);
@@ -228,6 +341,14 @@ body {
       .text-muted-foreground { color: var(--im-muted-foreground); }
       .border-muted-foreground { border-color: var(--im-muted-foreground); }
       .ring-muted-foreground { --tw-ring-color: var(--im-muted-foreground); }
+      .bg-accent { background-color: var(--im-accent); }
+      .text-accent { color: var(--im-accent); }
+      .border-accent { border-color: var(--im-accent); }
+      .ring-accent { --tw-ring-color: var(--im-accent); }
+      .bg-accent-foreground { background-color: var(--im-accent-foreground); }
+      .text-accent-foreground { color: var(--im-accent-foreground); }
+      .border-accent-foreground { border-color: var(--im-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--im-accent-foreground); }
       .bg-border { background-color: var(--im-border); }
       .text-border { color: var(--im-border); }
       .border-border { border-color: var(--im-border); }
@@ -260,59 +381,314 @@ body {
 </head>
 <body class="min-h-screen font-sans antialiased">
   <style id="critical-layout">
-    .shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column}
-    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 85%,transparent);backdrop-filter:blur(10px)}
-    .logo-mark{background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
-    .nav-item{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 12%,transparent)}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:8px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
-    .btn-primary:hover{transform:translateY(-1px);opacity:.92}
-    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .cat-card{position:relative;display:block;overflow:hidden;border-radius:18px;border:1px solid var(--im-border);background:var(--im-card);transition:border-color .16s ease,transform .16s ease}
-    .cat-card:hover{border-color:color-mix(in srgb,var(--im-primary) 40%,var(--im-border));transform:translateY(-4px)}
-    .cat-card img{width:100%;height:210px;object-fit:cover;display:block}
-    .cat-card .shade{position:absolute;top:0;left:0;right:0;height:210px;background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--im-card) 94%,transparent))}
-    .cat-body{padding:18px}
-    .cat-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
-    .cat-count{font-size:12px;color:var(--im-muted-foreground);font-variant-numeric:tabular-nums}
+    /* ===== Im-chc 分类点评 · 关键布局（自包含，不依赖 Tailwind 运行时） ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    .shell-root {
+      min-height: 100vh;
+      background: var(--im-background);
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 767px) {
+      .shell-root { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 16px); }
+    }
+
+    /* ---- 桌面 44px Apple Store 式深色顶栏 ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: 44px;
+      width: 100%;
+      border-bottom: 1px solid var(--im-border);
+      background: color-mix(in srgb, var(--im-background) 82%, transparent);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+    .site-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 44px;
+      max-width: 1152px;
+      margin: 0 auto;
+      padding-left: clamp(14px, 3.5vw, 32px);
+      padding-right: clamp(14px, 3.5vw, 32px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      text-decoration: none;
+      color: var(--im-foreground);
+    }
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      flex: none;
+      background: color-mix(in srgb, var(--im-primary) 14%, transparent);
+      color: var(--im-primary);
+    }
+    .brand .logo-mark svg, .brand .logo-mark i { width: 13px; height: 13px; }
+    .brand-name { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-item {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: var(--im-radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--im-muted-foreground);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .18s cubic-bezier(.32,.72,0,1), background .18s cubic-bezier(.32,.72,0,1);
+    }
+    .nav-item:hover { color: var(--im-foreground); background: var(--im-accent); }
+    .nav-item[data-active="true"] {
+      color: var(--im-primary);
+      background: color-mix(in srgb, var(--im-primary) 14%, transparent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 30px;
+      padding: 0 14px;
+      border-radius: var(--im-radius-full);
+      background: var(--im-primary);
+      color: var(--im-primary-foreground);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: filter .18s cubic-bezier(.32,.72,0,1), transform .18s cubic-bezier(.32,.72,0,1);
+    }
+    .header-cta:hover { filter: brightness(.92); }
+    .header-cta:active { transform: scale(.97); }
+    .header-cta svg, .header-cta i { width: 14px; height: 14px; }
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--im-radius-full);
+      border: none;
+      background: transparent;
+      color: var(--im-muted-foreground);
+      cursor: pointer;
+      transition: color .18s cubic-bezier(.32,.72,0,1), background .18s cubic-bezier(.32,.72,0,1);
+    }
+    .icon-btn:hover { color: var(--im-foreground); background: var(--im-accent); }
+    .icon-btn svg, .icon-btn i { width: 16px; height: 16px; }
+
+    /* ---- 主体流式容器 ---- */
+    .shell-main {
+      width: 100%;
+      max-width: 1152px;
+      margin: 0 auto;
+      padding-left: clamp(16px, 4vw, 32px);
+      padding-right: clamp(16px, 4vw, 32px);
+      padding-bottom: clamp(32px, 6vw, 72px);
+    }
+
+    /* ---- 页头（编辑式、克制） ---- */
+    .page-hero {
+      padding-top: clamp(28px, 6vw, 72px);
+      padding-bottom: clamp(20px, 3.5vw, 36px);
+    }
+    .hero-kicker {
+      margin: 0 0 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--im-primary);
+    }
+    .page-title {
+      margin: 0;
+      font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+      color: var(--im-foreground);
+    }
+    .hero-sub {
+      margin: 12px 0 0;
+      font-size: clamp(.95rem, 2vw, 1.05rem);
+      color: var(--im-muted-foreground);
+    }
+
+    /* ---- 分类网格：手机 1 列 → ≥640px 2 列 → ≥1024px 4 列 ---- */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(14px, 2.5vw, 24px);
+    }
+    @media (min-width: 640px)  { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ---- 分类卡片（图片主导，窄屏正常堆叠） ---- */
+    .cat-card {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      min-width: 0;
+      border-radius: var(--im-radius-large);
+      border: 1px solid var(--im-border);
+      background: var(--im-card);
+      text-decoration: none;
+      overflow-wrap: break-word;
+      transition: transform .28s cubic-bezier(.32,.72,0,1), border-color .28s cubic-bezier(.32,.72,0,1), box-shadow .28s cubic-bezier(.32,.72,0,1);
+    }
+    .cat-card:hover {
+      border-color: color-mix(in srgb, var(--im-primary) 45%, var(--im-border));
+      transform: translateY(-4px);
+      box-shadow: var(--im-shadow-lg);
+    }
+    .cat-card > img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    @media (min-width: 640px)  { .cat-card > img { height: 188px; } }
+    @media (min-width: 1024px) { .cat-card > img { height: 210px; } }
+    .cat-card .shade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 160px;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--im-card) 92%, transparent));
+    }
+    @media (min-width: 640px)  { .cat-card .shade { height: 188px; } }
+    @media (min-width: 1024px) { .cat-card .shade { height: 210px; } }
+
+    .cat-body { padding: clamp(14px, 2vw, 20px); }
+
+    /* 卡片内部行（与 CMS 渲染结构一致；Tailwind 未加载时布局仍成立） */
+    .cat-card .flex { display: flex; align-items: center; gap: 12px; }
+    .cat-card .min-w-0 { min-width: 0; }
+    .cat-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      flex: none;
+      background: color-mix(in srgb, var(--im-primary) 14%, transparent);
+      color: var(--im-primary);
+    }
+    .cat-icon svg, .cat-icon i { width: 20px; height: 20px; }
+    .cat-card h2 {
+      margin: 0;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--im-foreground);
+    }
+    .cat-card .text-lg { font-size: clamp(1.05rem, 2vw, 1.2rem); }
+    .cat-card .font-bold { font-weight: 700; }
+    .cat-count {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--im-muted-foreground);
+      font-variant-numeric: tabular-nums;
+    }
+    .cat-card .mt-3 { margin-top: 12px; }
+    .cat-card .text-sm { font-size: clamp(.82rem, 1.6vw, .875rem); }
+    .cat-card .leading-relaxed { line-height: 1.65; }
+    .cat-card .text-muted-foreground { color: var(--im-muted-foreground); }
+    .cat-card .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* ---- 页脚 ---- */
+    .site-footer {
+      border-top: 1px solid var(--im-border);
+      background: var(--im-background);
+    }
+    .site-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 16px;
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: clamp(18px, 4vw, 28px) clamp(16px, 4vw, 32px);
+    }
+    .footer-brand { display: inline-flex; align-items: center; gap: 8px; color: var(--im-foreground); }
+    .footer-brand .logo-mark { width: 22px; height: 22px; border-radius: 7px; }
+    .footer-brand .logo-mark svg, .footer-brand .logo-mark i { width: 13px; height: 13px; }
+    .footer-brand .font-display { font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .footer-copy { margin: 0; font-size: 13px; color: var(--im-muted-foreground); }
+
+    /* ---- 移动端底部 Tab Bar 图标尺寸（lucide 替换后仍受控） ---- */
+    .mobile-tabbar .mtab svg, .mobile-tabbar .mtab i { width: 20px; height: 20px; }
   </style>
 
   <div class="shell-root">
     <header class="site-header">
-      <div class="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-6">
-        <a href="index.html" class="flex min-w-0 items-center gap-2.5" aria-label="Im-chc 首页">
-          <span class="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg">
-            <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
-          </span>
-          <span class="font-display truncate text-lg font-bold tracking-tight">Im-chc</span>
+      <div class="site-header-inner">
+        <a href="#" class="brand" aria-label="Im-chc 首页">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="brand-name font-display">Im-chc</span>
         </a>
-        <nav class="flex items-center gap-1" aria-label="主导航">
-          <a href="index.html" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
-          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
-          <a href="category.html" data-nav-key="category" data-active="true" class="nav-item">分类点评</a>
-          <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
+          <a href="#" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="#" data-nav-key="category" data-active="true" class="nav-item">分类点评</a>
+          <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <a href="blog.html" data-dom-id="cta-blog" class="btn-primary">
-            <i data-lucide="pen-line" class="h-4 w-4"></i>
+        <div class="header-actions">
+          <a href="#" data-dom-id="cta-blog" class="header-cta desktop-cta">
+            <i data-lucide="pen-line"></i>
             <span>开始创作</span>
           </a>
           <button type="button" class="icon-btn" aria-label="搜索">
-            <i data-lucide="search" class="h-[18px] w-[18px]"></i>
+            <i data-lucide="search"></i>
           </button>
         </div>
       </div>
     </header>
 
-    <main class="w-full max-w-6xl self-center px-6 pb-6 pt-8">
-      <div class="mb-6">
-        <h1 class="font-display text-3xl font-bold">分类点评</h1>
-        <p class="mt-2 text-sm text-muted-foreground">电影、音乐、旅行与美食，四类生活切片</p>
-      </div>
+    <main class="shell-main">
+      <section class="page-hero">
+        <p class="hero-kicker font-display">Reviews</p>
+        <h1 class="page-title font-display">分类点评</h1>
+        <p class="hero-sub">电影、音乐、旅行与美食，四类生活切片</p>
+      </section>
 
-      <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="分类卡片" id="cat-grid">
+      <section class="cat-grid" id="cat-grid" aria-label="分类卡片">
         <a href="#" class="cat-card">
           <img src="assets/category-cinema.svg" alt="电影分类">
           <div class="shade"></div>
@@ -372,18 +748,31 @@ body {
       </section>
     </main>
 
-    <footer class="w-full border-t border-border bg-background">
-      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-8">
-        <div class="flex items-center gap-2.5">
-          <span class="logo-mark flex h-7 w-7 items-center justify-center rounded-md">
-            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
-          </span>
-          <span class="font-display text-sm font-semibold">Im-chc 个人博客</span>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="footer-brand">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="font-display">Im-chc 个人博客</span>
         </div>
-        <p class="text-sm text-muted-foreground">© 2026 Im-chc · 用代码记录生活</p>
+        <p class="footer-copy">© 2026 Im-chc · 用代码记录生活</p>
       </div>
     </footer>
   </div>
+
+  <nav class="mobile-tabbar" aria-label="移动端导航">
+    <a href="#" data-nav-key="home" data-dom-id="tab-home" class="mtab">
+      <i data-lucide="home"></i><span>首页</span>
+    </a>
+    <a href="#" data-nav-key="life" data-dom-id="tab-life" class="mtab">
+      <i data-lucide="image"></i><span>人生时刻</span>
+    </a>
+    <a href="#" data-nav-key="category" data-active="true" class="mtab">
+      <i data-lucide="layout-grid"></i><span>分类点评</span>
+    </a>
+    <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="mtab">
+      <i data-lucide="pen-line"></i><span>博客创作</span>
+    </a>
+  </nav>
 
   <script src="assets/cms.js"></script>
   <script>
@@ -401,7 +790,7 @@ body {
         grid.innerHTML = names.map(function (name) {
           var c = cats[name] || {};
           return '<a href="#" class="cat-card">' +
-            '<img src="' + esc(c.cover || '') + '" alt="' + esc(name) + '分类">' +
+            '<img src="' + esc(CMS.resolveAsset(c.cover)) + '" alt="' + esc(name) + '分类">' +
             '<div class="shade"></div>' +
             '<div class="cat-body">' +
             '<div class="flex items-center gap-3">' +

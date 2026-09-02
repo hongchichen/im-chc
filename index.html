@@ -6,109 +6,126 @@
     <title>首页</title>
     <style id="theme-vars">
 /* ============================================================
-   Im-chc 个人博客 · 深色简约现代主题
+   Im-chc 个人博客 · 苹果风格响应式主题（草稿版）
    brand prefix: im
+   参考设计系统: Pinguo / Apple HIG
+   要点: Space Black + Silver Mist + System Blue，DM Sans 正文、
+   JetBrains Mono 技术字，1px 边框 + 轻声阴影，胶囊按钮，
+   大圆角，留白优先；全设备响应式（390/768/1024/1440）。
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Apple System Palette ---------- */
+:root {
+  /* brand blue scale (System Blue #007AFF anchored) */
+  --im-primary-50: #e8f2ff;
+  --im-primary-100: #cfe5ff;
+  --im-primary-200: #9fcbff;
+  --im-primary-300: #66abff;
+  --im-primary-400: #2e8dff;
+  --im-primary-500: #007aff;
+  --im-primary-600: #0064d6;
+  --im-primary-700: #004fad;
+  --im-primary-800: #003b82;
+  --im-primary-900: #00275a;
+
+  /* neutral scale (dark: Space Black family) */
+  --im-neutral-50: #f5f5f7;
+  --im-neutral-100: #e3e3e8;
+  --im-neutral-200: #c7c7cc;
+  --im-neutral-300: #aeaeb2;
+  --im-neutral-400: #8e8e93;
+  --im-neutral-500: #6e6e73;
+  --im-neutral-600: #48484a;
+  --im-neutral-700: #3a3a3c;
+  --im-neutral-800: #2c2c2e;
+  --im-neutral-900: #1c1c1e;
+
+  /* semantic state colors */
+  --state-success: #34c759;
+  --state-success-dark: #30d158;
+  --state-warning: #ff9f0a;
+  --state-error: #ff3b30;
+  --state-error-dark: #ff453a;
+  --state-info: #0a84ff;
+}
 
 /* ---------- Dark base (default) ---------- */
 :root {
-  --im-background: #0b0d12;
-  --im-foreground: #eaeef7;
-  --im-card: #12151d;
-  --im-card-foreground: #eaeef7;
-  --im-popover: #171b26;
-  --im-popover-foreground: #eaeef7;
-  --im-primary: #7c8cff;
-  --im-primary-foreground: #0b0d12;
-  --im-muted: #141824;
-  --im-muted-foreground: #8f98ac;
-  --im-border: #1e2330;
-  --im-input: #1e2330;
-  --im-ring: rgba(124, 140, 255, 0.45);
-  --im-radius-small: 4px;
-  --im-radius-medium: 8px;
-  --im-radius-large: 12px;
+  --im-background: #000000;
+  --im-foreground: #f5f5f7;
+  --im-card: #1c1c1e;
+  --im-card-foreground: #f5f5f7;
+  --im-popover: #3a3a3c;
+  --im-popover-foreground: #f5f5f7;
+  --im-primary: #2e8dff;
+  --im-primary-foreground: #ffffff;
+  --im-muted: #1c1c1e;
+  --im-muted-foreground: #8e8e93;
+  --im-accent: #2c2c2e;
+  --im-accent-foreground: #f5f5f7;
+  --im-border: #3a3a3c;
+  --im-input: #3a3a3c;
+  --im-ring: rgba(46, 141, 255, 0.5);
+  --im-radius-small: 8px;
+  --im-radius-medium: 14px;
+  --im-radius-large: 20px;
   --im-radius-full: 9999px;
 
-  /* brand primary scale (single hue: indigo) */
-  --im-primary-50: #eef0ff;
-  --im-primary-100: #e0e3ff;
-  --im-primary-200: #c6ccff;
-  --im-primary-300: #a6adff;
-  --im-primary-400: #8f98ff;
-  --im-primary-500: #7c8cff;
-  --im-primary-600: #636ef0;
-  --im-primary-700: #4d55d0;
-  --im-primary-800: #3f45a3;
-  --im-primary-900: #363b7e;
-
-  /* neutral scale (dark) */
-  --im-neutral-50: #f3f5fa;
-  --im-neutral-100: #e7eaf2;
-  --im-neutral-200: #c9cfdc;
-  --im-neutral-300: #9aa3b5;
-  --im-neutral-400: #6b7488;
-  --im-neutral-500: #4a5163;
-  --im-neutral-600: #323848;
-  --im-neutral-700: #242936;
-  --im-neutral-800: #1a1e28;
-  --im-neutral-900: #12151d;
-
-  /* semantic state colors */
-  --state-success: #3ddc97;
-  --state-warning: #f5b544;
-  --state-error: #f56565;
-  --state-info: #4aa8ff;
-
-  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --im-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.05);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Light alternative ---------- */
+/* ---------- Light alternative (Silver Mist family) ---------- */
 .light {
-  --im-background: #f6f7fb;
-  --im-foreground: #141824;
+  --im-background: #f5f5f7;
+  --im-foreground: #1d1d1f;
   --im-card: #ffffff;
-  --im-card-foreground: #141824;
+  --im-card-foreground: #1d1d1f;
   --im-popover: #ffffff;
-  --im-popover-foreground: #141824;
-  --im-primary: #5565e8;
+  --im-popover-foreground: #1d1d1f;
+  --im-primary: #007aff;
   --im-primary-foreground: #ffffff;
-  --im-muted: #eceef5;
-  --im-muted-foreground: #5b6478;
-  --im-border: #e3e7f0;
-  --im-input: #e3e7f0;
-  --im-ring: rgba(85, 101, 232, 0.35);
-  --im-shadow-sm: 0 1px 2px rgba(20, 24, 36, 0.04);
-  --im-shadow-md: 0 4px 14px rgba(20, 24, 36, 0.05);
-  --im-shadow-lg: 0 12px 32px rgba(20, 24, 36, 0.06);
+  --im-muted: #f2f2f7;
+  --im-muted-foreground: #6e6e73;
+  --im-accent: #f2f2f7;
+  --im-accent-foreground: #1d1d1f;
+  --im-border: #d1d1d6;
+  --im-input: #d1d1d6;
+  --im-ring: rgba(0, 122, 255, 0.35);
+  --im-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --im-shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --im-shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
 }
 
 /* ---------- Typography ---------- */
 .font-sans,
 body {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, -apple-system, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .font-display {
-  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Noto Sans SC', system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+}
+
 .text-hero {
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 
 .text-section {
-  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-  line-height: 1.25;
-  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -120,6 +137,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -127,13 +145,7 @@ body {
   color: var(--im-foreground);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-/* subtle ambient glow used by hero/cards */
-.ambient-glow {
-  background:
-    radial-gradient(60% 80% at 20% 10%, rgba(124, 140, 255, 0.16), transparent 60%),
-    radial-gradient(50% 70% at 90% 20%, rgba(124, 140, 255, 0.08), transparent 60%);
+  overflow-x: hidden;
 }
 
 .card-surface {
@@ -142,22 +154,121 @@ body {
   border-radius: var(--im-radius-large);
 }
 
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* ---------- Apple component primitives (responsive) ---------- */
+
+/* Pill button */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--im-radius-full);
+  background: var(--im-primary);
+  color: var(--im-primary-foreground);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter .18s ease, transform .18s ease, opacity .18s ease;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.btn-pill:hover { filter: brightness(.95); }
+.btn-pill:active { transform: scale(.98); }
+.btn-pill:disabled { opacity: .42; cursor: not-allowed; }
+
+/* Secondary pill */
+.btn-pill-secondary {
+  background: var(--im-muted);
+  color: var(--im-foreground);
+  border: 1px solid var(--im-border);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--im-neutral-700);
-  border-radius: 9999px;
-  border: 2px solid var(--im-background);
+.btn-pill-secondary:hover { filter: brightness(1.06); }
+
+/* Top nav item (Apple Store style) */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: var(--im-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--im-muted-foreground);
+  transition: color .18s ease, background .18s ease;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--im-neutral-600);
+.nav-item:hover { color: var(--im-foreground); background: var(--im-accent); }
+.nav-item[data-active="true"] { color: var(--im-primary); background: color-mix(in srgb, var(--im-primary) 14%, transparent); }
+
+/* Mobile bottom tab bar (Apple-style, blur + safe-area) */
+.mobile-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-top: 1px solid var(--im-border);
+  background: color-mix(in srgb, var(--im-background) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
+.mobile-tabbar .mtab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--im-radius-medium);
+  color: var(--im-muted-foreground);
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.mobile-tabbar .mtab[data-active="true"] { color: var(--im-primary); }
+.mobile-tabbar .mtab i { width: 20px; height: 20px; }
+
+/* Hide top nav on mobile, show tab bar; hide tab bar on desktop */
+@media (max-width: 767px) {
+  .desktop-nav { display: none !important; }
+  .desktop-cta { display: none !important; }
+  .mobile-tabbar { display: flex; }
+}
+@media (min-width: 768px) {
+  .mobile-tabbar { display: none; }
+}
+
+/* Fluid container */
+.shell-main {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
+
+/* Responsive card grid helpers (fallback if Tailwind delayed) */
+.grid-auto-1 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px)  { .grid-auto-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-auto-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Minimal scrollbar (quiet, Apple-like) */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--im-neutral-700); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--im-neutral-600); }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
@@ -174,6 +285,8 @@ body {
     --color-primary-foreground: var(--im-primary-foreground);
     --color-muted: var(--im-muted);
     --color-muted-foreground: var(--im-muted-foreground);
+    --color-accent: var(--im-accent);
+    --color-accent-foreground: var(--im-accent-foreground);
     --color-border: var(--im-border);
     --color-input: var(--im-input);
     --color-ring: var(--im-ring);
@@ -228,6 +341,14 @@ body {
       .text-muted-foreground { color: var(--im-muted-foreground); }
       .border-muted-foreground { border-color: var(--im-muted-foreground); }
       .ring-muted-foreground { --tw-ring-color: var(--im-muted-foreground); }
+      .bg-accent { background-color: var(--im-accent); }
+      .text-accent { color: var(--im-accent); }
+      .border-accent { border-color: var(--im-accent); }
+      .ring-accent { --tw-ring-color: var(--im-accent); }
+      .bg-accent-foreground { background-color: var(--im-accent-foreground); }
+      .text-accent-foreground { color: var(--im-accent-foreground); }
+      .border-accent-foreground { border-color: var(--im-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--im-accent-foreground); }
       .bg-border { background-color: var(--im-border); }
       .text-border { color: var(--im-border); }
       .border-border { border-color: var(--im-border); }
@@ -260,88 +381,170 @@ body {
 </head>
 <body class="min-h-screen font-sans antialiased">
   <style id="critical-layout">
+    /* ============ Shell & fluid layout ============ */
     .shell-root{min-height:100vh;background:var(--im-background);display:flex;flex-direction:column}
-    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 85%,transparent);backdrop-filter:blur(10px)}
-    .logo-mark{background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
-    .nav-item{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .nav-item:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 12%,transparent)}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:8px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
-    .btn-primary:hover{transform:translateY(-1px);opacity:.92}
-    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--im-muted-foreground);transition:color .16s ease,background .16s ease}
-    .icon-btn:hover{color:var(--im-foreground);background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
-    .tag{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:999px;font-size:12px;background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-primary)}
-    .carousel-wrap{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--im-border);aspect-ratio:21/9;background:var(--im-card)}
-    .carousel-slide{position:absolute;inset:0;display:block;cursor:pointer;transition:opacity .5s ease}
+    .shell-main{width:100%;max-width:1152px;margin:0 auto;padding-left:clamp(16px,4vw,32px);padding-right:clamp(16px,4vw,32px)}
+    .shell-main.body{flex:1;width:100%;padding-top:clamp(20px,3.5vw,40px);padding-bottom:104px}
+    @media(min-width:768px){.shell-main.body{padding-bottom:clamp(48px,6vw,80px)}}
+
+    /* ============ Header (Apple Store style) ============ */
+    .site-header{position:sticky;top:0;z-index:40;width:100%;border-bottom:1px solid var(--im-border);background:color-mix(in srgb,var(--im-background) 82%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+    @media(min-width:768px){.header-inner{height:44px}}
+    .logo-link{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:inherit}
+    .logo-mark{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;border-radius:var(--im-radius-medium);background:color-mix(in srgb,var(--im-primary) 14%,transparent);color:var(--im-primary)}
+    .logo-mark svg{width:16px;height:16px}
+    .logo-text{font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;font-size:17px;white-space:nowrap}
+    .desktop-nav{display:none;align-items:center;gap:2px}
+    @media(min-width:768px){.desktop-nav{display:flex}}
+    .nav-item{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:var(--im-radius-full);font-size:13px;font-weight:500;color:var(--im-muted-foreground);white-space:nowrap;text-decoration:none;transition:color .18s cubic-bezier(.32,.72,0,1),background .18s cubic-bezier(.32,.72,0,1)}
+    .nav-item:hover{color:var(--im-foreground);background:var(--im-accent)}
+    .nav-item[data-active="true"]{color:var(--im-primary);background:color-mix(in srgb,var(--im-primary) 14%,transparent)}
+    .header-actions{display:flex;align-items:center;gap:6px}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:none;border-radius:var(--im-radius-full);background:transparent;color:var(--im-muted-foreground);cursor:pointer;transition:color .18s cubic-bezier(.32,.72,0,1),background .18s cubic-bezier(.32,.72,0,1)}
+    .icon-btn:hover{color:var(--im-foreground);background:var(--im-accent)}
+    .icon-btn svg{width:18px;height:18px}
+    .header-cta{min-height:36px;padding:0 16px;font-size:13px;text-decoration:none}
+    .header-cta svg{width:16px;height:16px}
+    @media(max-width:767px){.desktop-nav{display:none!important}.desktop-cta{display:none!important}}
+
+    /* ============ Carousel ============ */
+    .carousel-wrap{position:relative;border-radius:var(--im-radius-large);overflow:hidden;border:1px solid var(--im-border);background:var(--im-card);box-shadow:var(--im-shadow-md);aspect-ratio:21/9}
+    @media(max-width:767px){.carousel-wrap{aspect-ratio:4/3;min-height:340px}}
+    .carousel-slide{position:absolute;inset:0;display:block;cursor:pointer;transition:opacity .35s cubic-bezier(.32,.72,0,1)}
     .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
-    .carousel-slide .slide-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,18,0.72) 0%,rgba(11,13,18,0.15) 55%,rgba(11,13,18,0.25) 100%)}
-    .carousel-slide .slide-caption{position:absolute;left:48px;bottom:44px;max-width:520px}
-    .carousel-dot{width:7px;height:7px;border-radius:999px;background:color-mix(in srgb,var(--im-foreground) 30%,transparent);transition:width .2s ease,background .2s ease}
+    .slide-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.66) 0%,rgba(0,0,0,.18) 55%,rgba(0,0,0,.3) 100%)}
+    @media(max-width:767px){.slide-shade{background:linear-gradient(180deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.74) 100%)}}
+    .slide-caption{position:absolute;left:clamp(20px,4vw,48px);bottom:clamp(20px,5vw,44px);max-width:520px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+    @media(max-width:767px){.slide-caption{left:20px;right:20px;max-width:none;gap:8px}}
+    .slide-caption .tag{margin:0}
+    .slide-title{margin:0;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;letter-spacing:-0.03em;font-weight:600;line-height:1.1;color:var(--im-foreground);font-size:clamp(1.5rem,3.2vw,2.5rem)}
+    @media(max-width:767px){.slide-title{font-size:clamp(1.3rem,6.5vw,1.8rem);line-height:1.2}}
+    .slide-sub{margin:0;font-size:clamp(.875rem,1.3vw,1.0625rem);line-height:1.55;font-weight:400;color:color-mix(in srgb,var(--im-foreground) 82%,transparent)}
+    @media(max-width:767px){.slide-sub{font-size:.875rem}}
+    .carousel-dots{position:absolute;bottom:clamp(16px,3vw,24px);right:clamp(16px,3vw,28px);z-index:10;display:flex;align-items:center;gap:8px}
+    @media(max-width:767px){.carousel-dots{top:16px;bottom:auto}}
+    .carousel-dot{width:7px;height:7px;padding:0;border:none;border-radius:9999px;background:color-mix(in srgb,var(--im-foreground) 30%,transparent);cursor:pointer;transition:width .25s cubic-bezier(.32,.72,0,1),background .25s cubic-bezier(.32,.72,0,1)}
     .carousel-dot[data-active="true"]{width:22px;background:var(--im-primary)}
-    .blog-card{display:flex;flex-direction:column;background:var(--im-card);border:1px solid var(--im-border);border-radius:16px;overflow:hidden;transition:border-color .16s ease,transform .16s ease}
-    .blog-card:hover{border-color:color-mix(in srgb,var(--im-primary) 40%,var(--im-border));transform:translateY(-3px)}
-    .blog-card .thumb{width:100%;height:170px;object-fit:cover;display:block}
-    .blog-card .body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+
+    /* ============ Tag ============ */
+    .tag{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:var(--im-radius-full);font-size:12px;font-weight:500;background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-primary);white-space:nowrap}
+
+    /* ============ Author card ============ */
+    .author-card{display:flex;flex-direction:column;gap:16px;padding:clamp(16px,3vw,24px);background:var(--im-card);border:1px solid var(--im-border);border-radius:var(--im-radius-large);box-shadow:var(--im-shadow-sm);margin-top:clamp(20px,4vw,32px)}
+    @media(min-width:768px){.author-card{flex-direction:row;align-items:center;justify-content:space-between}}
+    .author-top{display:flex;align-items:center;gap:14px;min-width:0}
+    .avatar{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:clamp(48px,8vw,56px);height:clamp(48px,8vw,56px);border-radius:9999px;background:color-mix(in srgb,var(--im-primary) 15%,transparent);color:var(--im-primary);font-weight:700;font-size:clamp(1.125rem,2vw,1.375rem)}
+    .author-info{min-width:0}
+    .author-name{margin:0;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;letter-spacing:-0.01em;font-weight:600;font-size:clamp(1rem,2vw,1.125rem)}
+    .author-bio{margin:4px 0 0;font-size:.875rem;line-height:1.55;color:var(--im-muted-foreground);max-width:60ch}
+    .author-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:1px solid var(--im-border);padding-top:16px}
+    @media(min-width:768px){.author-stats{display:flex;align-items:center;gap:32px;border-top:none;padding-top:0;flex-shrink:0}}
+    .stat{display:flex;flex-direction:column;gap:2px}
+    @media(min-width:768px){.stat{align-items:center}}
+    .stat b{font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:-0.02em;font-size:clamp(1.125rem,2vw,1.375rem);color:var(--im-foreground)}
+    .stat span{font-size:.75rem;color:var(--im-muted-foreground)}
+
+    /* ============ Latest blog ============ */
+    .latest-section{margin-top:clamp(32px,6vw,56px)}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:clamp(16px,3vw,24px)}
+    .section-title{margin:0;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;font-size:clamp(1.375rem,3vw,1.75rem);line-height:1.2}
+    .section-meta{margin:0;font-size:.875rem;color:var(--im-muted-foreground);white-space:nowrap}
+    .blog-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:640px){.blog-grid{grid-template-columns:repeat(2,1fr);gap:24px}}
+    @media(min-width:1024px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+    .blog-card{display:flex;flex-direction:column;background:var(--im-card);border:1px solid var(--im-border);border-radius:var(--im-radius-large);overflow:hidden;text-decoration:none;transition:border-color .2s cubic-bezier(.32,.72,0,1),transform .2s cubic-bezier(.32,.72,0,1),box-shadow .2s cubic-bezier(.32,.72,0,1)}
+    .blog-card:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border));transform:translateY(-3px);box-shadow:var(--im-shadow-md)}
+    .blog-card .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--im-muted)}
+    .blog-card .body{display:flex;flex-direction:column;gap:10px;padding:clamp(14px,2vw,18px);flex:1}
+    .blog-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .blog-date{font-size:.75rem;color:var(--im-muted-foreground);white-space:nowrap}
+    .blog-title{margin:0;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;letter-spacing:-0.01em;font-weight:600;font-size:1rem;line-height:1.4;color:var(--im-foreground)}
+    .blog-excerpt{margin:0;font-size:.875rem;line-height:1.55;color:var(--im-muted-foreground)}
+
+    /* ============ Footer ============ */
+    .footer{border-top:1px solid var(--im-border);background:var(--im-background)}
+    .footer-inner{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:clamp(20px,4vw,32px);padding-bottom:clamp(20px,4vw,32px)}
+    @media(min-width:768px){.footer-inner{flex-direction:row;align-items:center;justify-content:space-between}}
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-brand .logo-mark{width:26px;height:26px;border-radius:var(--im-radius-small)}
+    .footer-brand .logo-mark svg{width:14px;height:14px}
+    .footer-name{margin:0;font-family:'DM Sans','Noto Sans SC',system-ui,sans-serif;font-size:.875rem;font-weight:600;letter-spacing:-0.01em}
+    .footer-copy{margin:0;font-size:.875rem;color:var(--im-muted-foreground)}
+
+    /* ============ Mobile tab bar refinements ============ */
+    .mobile-tabbar .mtab svg{width:20px;height:20px;stroke-width:1.8}
+    .mobile-tabbar .mtab span{line-height:1}
+
+    /* ============ Utility fallbacks (layout-critical, Tailwind-independent) ============ */
+    .flex{display:flex}
+    .items-center{align-items:center}
+    .gap-2{gap:8px}
+    .text-xs{font-size:12px}
+    .text-sm{font-size:14px}
+    .text-base{font-size:16px}
+    .font-semibold{font-weight:600}
+    .leading-snug{line-height:1.4}
+    .leading-relaxed{line-height:1.55}
+    .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   </style>
 
   <div class="shell-root">
     <header class="site-header">
-      <div class="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-6">
-        <a href="index.html" class="flex min-w-0 items-center gap-2.5" aria-label="Im-chc 首页">
-          <span class="logo-mark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg">
-            <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
-          </span>
-          <span class="font-display truncate text-lg font-bold tracking-tight">Im-chc</span>
+      <div class="shell-main header-inner">
+        <a href="#" class="logo-link" aria-label="Im-chc 首页">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="logo-text">Im-chc</span>
         </a>
-        <nav class="flex items-center gap-1" aria-label="主导航">
-          <a href="index.html" data-nav-key="home" data-active="true" class="nav-item">首页</a>
-          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
-          <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
-          <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#" data-nav-key="home" data-active="true" class="nav-item">首页</a>
+          <a href="#" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="#" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
+          <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <a href="blog.html" data-dom-id="cta-blog" class="btn-primary">
-            <i data-lucide="pen-line" class="h-4 w-4"></i>
+        <div class="header-actions">
+          <button type="button" class="icon-btn" aria-label="搜索">
+            <i data-lucide="search"></i>
+          </button>
+          <a href="#" data-dom-id="cta-blog" class="btn-pill header-cta desktop-cta">
+            <i data-lucide="pen-line"></i>
             <span>开始创作</span>
           </a>
-          <button type="button" class="icon-btn" aria-label="搜索">
-            <i data-lucide="search" class="h-[18px] w-[18px]"></i>
-          </button>
         </div>
       </div>
     </header>
 
-    <main class="w-full max-w-6xl self-center px-6 pb-6 pt-8">
+    <main class="shell-main body">
       <!-- 轮播 -->
       <section class="carousel-wrap" id="carousel" aria-label="精选文章轮播">
-        <a href="article.html" data-dom-id="carousel-slide-1" data-carousel-slide class="carousel-slide" style="opacity:1;z-index:1" aria-label="查看文章">
+        <a href="#" data-dom-id="carousel-slide-1" data-carousel-slide class="carousel-slide" style="opacity:1;z-index:1" aria-label="查看文章">
           <img src="assets/carousel-morning.svg" alt="雾山晨景">
           <div class="slide-shade"></div>
           <div class="slide-caption">
-            <span class="tag mb-3">旅行 · 2026</span>
-            <h1 class="font-display text-4xl font-bold leading-tight">雾山日出，一场说走就走的短途徒步</h1>
-            <p class="mt-3 text-base text-foreground/80">清晨四点的盘山公路与云海之上的一束光</p>
+            <span class="tag">旅行 · 2026</span>
+            <h1 class="slide-title">雾山日出，一场说走就走的短途徒步</h1>
+            <p class="slide-sub">清晨四点的盘山公路与云海之上的一束光</p>
           </div>
         </a>
-        <a href="article.html" data-dom-id="carousel-slide-2" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
+        <a href="#" data-dom-id="carousel-slide-2" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
           <img src="assets/carousel-night.svg" alt="城市夜景">
           <div class="slide-shade"></div>
           <div class="slide-caption">
-            <span class="tag mb-3">电影 · 2025</span>
-            <h1 class="font-display text-4xl font-bold leading-tight">深夜霓虹下的城市漫游指南</h1>
-            <p class="mt-3 text-base text-foreground/80">一部关于孤独与相遇的都市影像手记</p>
+            <span class="tag">电影 · 2025</span>
+            <h1 class="slide-title">深夜霓虹下的城市漫游指南</h1>
+            <p class="slide-sub">一部关于孤独与相遇的都市影像手记</p>
           </div>
         </a>
-        <a href="article.html" data-dom-id="carousel-slide-3" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
+        <a href="#" data-dom-id="carousel-slide-3" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
           <img src="assets/carousel-mountain.svg" alt="雪山峰峦">
           <div class="slide-shade"></div>
           <div class="slide-caption">
-            <span class="tag mb-3">旅行 · 2024</span>
-            <h1 class="font-display text-4xl font-bold leading-tight">在雪线之上，遇见自己</h1>
-            <p class="mt-3 text-base text-foreground/80">海拔四千米的一夜星空与清晨的第一缕阳光</p>
+            <span class="tag">旅行 · 2024</span>
+            <h1 class="slide-title">在雪线之上，遇见自己</h1>
+            <p class="slide-sub">海拔四千米的一夜星空与清晨的第一缕阳光</p>
           </div>
         </a>
-        <div class="absolute bottom-6 right-8 z-10 flex gap-2" aria-label="轮播指示点">
+        <div class="carousel-dots" aria-label="轮播指示点">
           <button type="button" data-carousel-dot data-active="true" class="carousel-dot" aria-label="第 1 张"></button>
           <button type="button" data-carousel-dot class="carousel-dot" aria-label="第 2 张"></button>
           <button type="button" data-carousel-dot class="carousel-dot" aria-label="第 3 张"></button>
@@ -349,90 +552,98 @@ body {
       </section>
 
       <!-- 关于作者 -->
-      <section class="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card px-6 py-5">
-        <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xl font-bold text-primary">H</span>
-        <div class="min-w-0 flex-1">
-          <p class="font-display text-base font-semibold">Hongchi Chen</p>
-          <p class="mt-0.5 text-sm text-muted-foreground">通信工程研究生 · 用博客记录生活、代码与思考，研究方向为时间序列。</p>
+      <section class="author-card" aria-label="关于作者">
+        <div class="author-top">
+          <span class="avatar">H</span>
+          <div class="author-info">
+            <p class="author-name">Hongchi Chen</p>
+            <p class="author-bio">通信工程研究生 · 用博客记录生活、代码与思考，研究方向为时间序列。</p>
+          </div>
         </div>
-        <div class="hidden shrink-0 items-center gap-8 md:flex">
-          <div class="text-center"><p class="font-display text-lg font-bold">115</p><p class="text-xs text-muted-foreground">文章</p></div>
-          <div class="text-center"><p class="font-display text-lg font-bold">4</p><p class="text-xs text-muted-foreground">分类</p></div>
-          <div class="text-center"><p class="font-display text-lg font-bold">10</p><p class="text-xs text-muted-foreground">年份</p></div>
+        <div class="author-stats">
+          <div class="stat"><b>115</b><span>文章</span></div>
+          <div class="stat"><b>4</b><span>分类</span></div>
+          <div class="stat"><b>10</b><span>年份</span></div>
         </div>
       </section>
 
       <!-- 最新博客 -->
-      <section class="mt-10" aria-labelledby="latest-title">
-        <div class="mb-5 flex items-end justify-between">
-          <h2 id="latest-title" class="font-display text-2xl font-bold">最新博客</h2>
-          <span class="text-sm text-muted-foreground" id="latest-count">共 6 篇</span>
+      <section class="latest-section" aria-labelledby="latest-title">
+        <div class="section-head">
+          <h2 id="latest-title" class="section-title">最新博客</h2>
+          <span class="section-meta" id="latest-count">共 6 篇</span>
         </div>
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="latest-grid">
-          <a href="article.html" data-dom-id="link-article-1" class="blog-card">
+        <div class="blog-grid" id="latest-grid">
+          <a href="#" data-dom-id="link-article-1" class="blog-card">
             <img class="thumb" src="assets/carousel-morning.svg" alt="雾山日出徒步">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">旅行</span><span class="text-xs text-muted-foreground">2026.05.12</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">雾山日出，一场说走就走的短途徒步</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">清晨四点的盘山公路，云海之上的一束光，记录一次凌晨出发的短途徒步。</p>
+              <div class="blog-meta"><span class="tag">旅行</span><span class="blog-date">2026.05.12</span></div>
+              <h3 class="blog-title">雾山日出，一场说走就走的短途徒步</h3>
+              <p class="blog-excerpt">清晨四点的盘山公路，云海之上的一束光，记录一次凌晨出发的短途徒步。</p>
             </div>
           </a>
-          <a href="article.html" data-dom-id="link-article-2" class="blog-card">
+          <a href="#" data-dom-id="link-article-2" class="blog-card">
             <img class="thumb" src="assets/carousel-night.svg" alt="城市夜景">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">电影</span><span class="text-xs text-muted-foreground">2026.04.28</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">深夜霓虹下的城市漫游指南</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">一部关于孤独与相遇的都市影像手记，写给深夜还醒着的城市漫游者。</p>
+              <div class="blog-meta"><span class="tag">电影</span><span class="blog-date">2026.04.28</span></div>
+              <h3 class="blog-title">深夜霓虹下的城市漫游指南</h3>
+              <p class="blog-excerpt">一部关于孤独与相遇的都市影像手记，写给深夜还醒着的城市漫游者。</p>
             </div>
           </a>
-          <a href="article.html" data-dom-id="link-article-3" class="blog-card">
+          <a href="#" data-dom-id="link-article-3" class="blog-card">
             <img class="thumb" src="assets/carousel-mountain.svg" alt="雪山徒步">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">旅行</span><span class="text-xs text-muted-foreground">2026.03.09</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">在雪线之上，遇见自己</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">海拔四千米的一夜星空与清晨的第一缕阳光，一次关于耐心的自我对话。</p>
+              <div class="blog-meta"><span class="tag">旅行</span><span class="blog-date">2026.03.09</span></div>
+              <h3 class="blog-title">在雪线之上，遇见自己</h3>
+              <p class="blog-excerpt">海拔四千米的一夜星空与清晨的第一缕阳光，一次关于耐心的自我对话。</p>
             </div>
           </a>
-          <a href="article.html" data-dom-id="link-article-4" class="blog-card">
+          <a href="#" data-dom-id="link-article-4" class="blog-card">
             <img class="thumb" src="assets/category-food.svg" alt="深夜食堂">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">美食</span><span class="text-xs text-muted-foreground">2026.02.17</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">巷口那家深夜食堂的治愈力</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">一碗热汤面，一盏暖黄的灯，记录那些被食物治愈的夜晚。</p>
+              <div class="blog-meta"><span class="tag">美食</span><span class="blog-date">2026.02.17</span></div>
+              <h3 class="blog-title">巷口那家深夜食堂的治愈力</h3>
+              <p class="blog-excerpt">一碗热汤面，一盏暖黄的灯，记录那些被食物治愈的夜晚。</p>
             </div>
           </a>
-          <a href="article.html" data-dom-id="link-article-5" class="blog-card">
+          <a href="#" data-dom-id="link-article-5" class="blog-card">
             <img class="thumb" src="assets/category-music.svg" alt="黑胶唱片">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">音乐</span><span class="text-xs text-muted-foreground">2026.01.30</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">2026 我的年度歌单 Top 10</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">从深夜实验电子到清晨民谣，十首歌陪我走过一整年。</p>
+              <div class="blog-meta"><span class="tag">音乐</span><span class="blog-date">2026.01.30</span></div>
+              <h3 class="blog-title">2026 我的年度歌单 Top 10</h3>
+              <p class="blog-excerpt">从深夜实验电子到清晨民谣，十首歌陪我走过一整年。</p>
             </div>
           </a>
-          <a href="article.html" data-dom-id="link-article-6" class="blog-card">
+          <a href="#" data-dom-id="link-article-6" class="blog-card">
             <img class="thumb" src="assets/category-cinema.svg" alt="电影胶片">
             <div class="body">
-              <div class="flex items-center gap-2"><span class="tag">电影</span><span class="text-xs text-muted-foreground">2026.01.06</span></div>
-              <h3 class="font-display text-base font-semibold leading-snug">那些在电影院哭过的夜晚</h3>
-              <p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">散场后空荡的街道，和眼眶里还没干的水光。</p>
+              <div class="blog-meta"><span class="tag">电影</span><span class="blog-date">2026.01.06</span></div>
+              <h3 class="blog-title">那些在电影院哭过的夜晚</h3>
+              <p class="blog-excerpt">散场后空荡的街道，和眼眶里还没干的水光。</p>
             </div>
           </a>
         </div>
       </section>
     </main>
 
-    <footer class="w-full border-t border-border bg-background">
-      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-8">
-        <div class="flex items-center gap-2.5">
-          <span class="logo-mark flex h-7 w-7 items-center justify-center rounded-md">
-            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
-          </span>
-          <span class="font-display text-sm font-semibold">Im-chc 个人博客</span>
+    <footer class="footer">
+      <div class="shell-main footer-inner">
+        <div class="footer-brand">
+          <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+          <span class="footer-name">Im-chc 个人博客</span>
         </div>
-        <p class="text-sm text-muted-foreground">© 2026 Im-chc · 用代码记录生活</p>
+        <p class="footer-copy">© 2026 Im-chc · 用代码记录生活</p>
       </div>
     </footer>
   </div>
+
+  <!-- 移动端底部 Tab Bar -->
+  <nav class="mobile-tabbar" aria-label="底部导航">
+    <a href="#" data-nav-key="home" data-active="true" class="mtab"><i data-lucide="home"></i><span>首页</span></a>
+    <a href="#" data-nav-key="life" data-dom-id="tab-life" class="mtab"><i data-lucide="camera"></i><span>人生时刻</span></a>
+    <a href="#" data-nav-key="category" data-dom-id="tab-category" class="mtab"><i data-lucide="layout-grid"></i><span>分类点评</span></a>
+    <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="mtab"><i data-lucide="pen-line"></i><span>博客创作</span></a>
+  </nav>
 
   <script>
     (function () {
@@ -458,9 +669,7 @@ body {
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
       CMS.loadLocal().then(function () {
-        /* 轮播 */
         var slides = Array.prototype.slice.call(document.querySelectorAll('[data-carousel-slide]'));
-        var dots = Array.prototype.slice.call(document.querySelectorAll('[data-carousel-dot]'));
         var carousel = CMS.snapshot().carousel || [];
         if (carousel.length && slides.length === carousel.length) {
           carousel.forEach(function (c, k) {
@@ -469,21 +678,20 @@ body {
             var tag = s.querySelector('.tag');
             var h = s.querySelector('h1');
             var p = s.querySelector('p');
-            if (img) img.src = c.cover;
+            if (img) img.src = CMS.resolveAsset(c.cover);
             if (tag) tag.textContent = c.tag;
             if (h) h.textContent = c.title;
             if (p) p.textContent = c.subtitle;
           });
         }
-        /* 最新文章列表 */
         var posts = CMS.latest(6);
         var grid = document.getElementById('latest-grid');
         var count = document.getElementById('latest-count');
         if (grid && posts.length) {
           count.textContent = '共 ' + posts.length + ' 篇';
           grid.innerHTML = posts.map(function (p, i) {
-            return '<a href="article.html?id=' + encodeURIComponent(p.id) + '" data-dom-id="link-article-' + (i + 1) + '" class="blog-card">' +
-              '<img class="thumb" src="' + esc(p.cover) + '" alt="' + esc(p.title) + '">' +
+            return '<a href="#" data-dom-id="link-article-' + (i + 1) + '" class="blog-card">' +
+              '<img class="thumb" src="' + esc(CMS.resolveAsset(p.cover)) + '" alt="' + esc(p.title) + '">' +
               '<div class="body">' +
               '<div class="flex items-center gap-2"><span class="tag">' + esc(p.category || '') + '</span><span class="text-xs text-muted-foreground">' + esc(p.date || '') + '</span></div>' +
               '<h3 class="font-display text-base font-semibold leading-snug">' + esc(p.title) + '</h3>' +
