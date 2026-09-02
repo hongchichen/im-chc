@@ -659,18 +659,18 @@ body {
   <div class="shell-root">
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="#" class="brand" aria-label="Im-chc 首页">
+        <a href="index.html" class="brand" aria-label="Im-chc 首页">
           <span class="logo-mark"><i data-lucide="sparkles"></i></span>
           <span class="brand-name font-display">Im-chc</span>
         </a>
         <nav class="desktop-nav" aria-label="主导航">
-          <a href="#" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
-          <a href="#" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
-          <a href="#" data-nav-key="category" data-active="true" class="nav-item">分类点评</a>
-          <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
+          <a href="index.html" data-nav-key="home" data-dom-id="tab-home" class="nav-item">首页</a>
+          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="category.html" data-nav-key="category" data-active="true" class="nav-item">分类点评</a>
+          <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
         </nav>
         <div class="header-actions">
-          <a href="#" data-dom-id="cta-blog" class="header-cta desktop-cta">
+          <a href="blog.html" data-dom-id="cta-blog" class="header-cta desktop-cta">
             <i data-lucide="pen-line"></i>
             <span>开始创作</span>
           </a>
@@ -689,7 +689,7 @@ body {
       </section>
 
       <section class="cat-grid" id="cat-grid" aria-label="分类卡片">
-        <a href="#" class="cat-card">
+        <a href="index.html" class="cat-card">
           <img src="assets/category-cinema.svg" alt="电影分类">
           <div class="shade"></div>
           <div class="cat-body">
@@ -703,7 +703,7 @@ body {
             <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">从商业大片到独立文艺，记录每一次银幕前的触动。</p>
           </div>
         </a>
-        <a href="#" class="cat-card">
+        <a href="index.html" class="cat-card">
           <img src="assets/category-music.svg" alt="音乐分类">
           <div class="shade"></div>
           <div class="cat-body">
@@ -717,7 +717,7 @@ body {
             <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">黑胶与耳机的双修党，偏爱深夜时分的低频与呢喃。</p>
           </div>
         </a>
-        <a href="#" class="cat-card">
+        <a href="index.html" class="cat-card">
           <img src="assets/category-travel.svg" alt="旅行分类">
           <div class="shade"></div>
           <div class="cat-body">
@@ -731,7 +731,7 @@ body {
             <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">山海与街巷，攻略与偶遇，都在这里慢慢写。</p>
           </div>
         </a>
-        <a href="#" class="cat-card">
+        <a href="index.html" class="cat-card">
           <img src="assets/category-food.svg" alt="美食分类">
           <div class="shade"></div>
           <div class="cat-body">
@@ -760,16 +760,16 @@ body {
   </div>
 
   <nav class="mobile-tabbar" aria-label="移动端导航">
-    <a href="#" data-nav-key="home" data-dom-id="tab-home" class="mtab">
+    <a href="index.html" data-nav-key="home" data-dom-id="tab-home" class="mtab">
       <i data-lucide="home"></i><span>首页</span>
     </a>
-    <a href="#" data-nav-key="life" data-dom-id="tab-life" class="mtab">
+    <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="mtab">
       <i data-lucide="image"></i><span>人生时刻</span>
     </a>
-    <a href="#" data-nav-key="category" data-active="true" class="mtab">
+    <a href="category.html" data-nav-key="category" data-active="true" class="mtab">
       <i data-lucide="layout-grid"></i><span>分类点评</span>
     </a>
-    <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="mtab">
+    <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="mtab">
       <i data-lucide="pen-line"></i><span>博客创作</span>
     </a>
   </nav>
@@ -789,7 +789,7 @@ body {
         var names = ['电影', '音乐', '旅行', '美食'];
         grid.innerHTML = names.map(function (name) {
           var c = cats[name] || {};
-          return '<a href="#" class="cat-card">' +
+          return '<a href="index.html" class="cat-card">' +
             '<img src="' + esc(CMS.resolveAsset(c.cover)) + '" alt="' + esc(name) + '分类">' +
             '<div class="shade"></div>' +
             '<div class="cat-body">' +

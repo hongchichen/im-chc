@@ -410,7 +410,7 @@ body {
 
     /* ============ Carousel ============ */
     .carousel-wrap{position:relative;border-radius:var(--im-radius-large);overflow:hidden;border:1px solid var(--im-border);background:var(--im-card);box-shadow:var(--im-shadow-md);aspect-ratio:21/9}
-    @media(max-width:767px){.carousel-wrap{aspect-ratio:4/3;min-height:340px}}
+    @media(max-width:767px){.carousel-wrap{aspect-ratio:16/9}}
     .carousel-slide{position:absolute;inset:0;display:block;cursor:pointer;transition:opacity .35s cubic-bezier(.32,.72,0,1)}
     .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
     .slide-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.66) 0%,rgba(0,0,0,.18) 55%,rgba(0,0,0,.3) 100%)}
@@ -492,21 +492,21 @@ body {
   <div class="shell-root">
     <header class="site-header">
       <div class="shell-main header-inner">
-        <a href="#" class="logo-link" aria-label="Im-chc 首页">
+        <a href="index.html" class="logo-link" aria-label="Im-chc 首页">
           <span class="logo-mark"><i data-lucide="sparkles"></i></span>
           <span class="logo-text">Im-chc</span>
         </a>
         <nav class="desktop-nav" aria-label="主导航">
-          <a href="#" data-nav-key="home" data-active="true" class="nav-item">首页</a>
-          <a href="#" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
-          <a href="#" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
-          <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
+          <a href="index.html" data-nav-key="home" data-active="true" class="nav-item">首页</a>
+          <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="nav-item">人生时刻</a>
+          <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="nav-item">分类点评</a>
+          <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="nav-item">博客创作</a>
         </nav>
         <div class="header-actions">
           <button type="button" class="icon-btn" aria-label="搜索">
             <i data-lucide="search"></i>
           </button>
-          <a href="#" data-dom-id="cta-blog" class="btn-pill header-cta desktop-cta">
+          <a href="blog.html" data-dom-id="cta-blog" class="btn-pill header-cta desktop-cta">
             <i data-lucide="pen-line"></i>
             <span>开始创作</span>
           </a>
@@ -517,7 +517,7 @@ body {
     <main class="shell-main body">
       <!-- 轮播 -->
       <section class="carousel-wrap" id="carousel" aria-label="精选文章轮播">
-        <a href="#" data-dom-id="carousel-slide-1" data-carousel-slide class="carousel-slide" style="opacity:1;z-index:1" aria-label="查看文章">
+        <a href="article.html" data-dom-id="carousel-slide-1" data-carousel-slide class="carousel-slide" style="opacity:1;z-index:1" aria-label="查看文章">
           <img src="assets/carousel-morning.svg" alt="雾山晨景">
           <div class="slide-shade"></div>
           <div class="slide-caption">
@@ -526,7 +526,7 @@ body {
             <p class="slide-sub">清晨四点的盘山公路与云海之上的一束光</p>
           </div>
         </a>
-        <a href="#" data-dom-id="carousel-slide-2" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
+        <a href="article.html" data-dom-id="carousel-slide-2" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
           <img src="assets/carousel-night.svg" alt="城市夜景">
           <div class="slide-shade"></div>
           <div class="slide-caption">
@@ -535,7 +535,7 @@ body {
             <p class="slide-sub">一部关于孤独与相遇的都市影像手记</p>
           </div>
         </a>
-        <a href="#" data-dom-id="carousel-slide-3" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
+        <a href="article.html" data-dom-id="carousel-slide-3" data-carousel-slide class="carousel-slide" style="opacity:0;z-index:0" aria-label="查看文章">
           <img src="assets/carousel-mountain.svg" alt="雪山峰峦">
           <div class="slide-shade"></div>
           <div class="slide-caption">
@@ -561,9 +561,9 @@ body {
           </div>
         </div>
         <div class="author-stats">
-          <div class="stat"><b>115</b><span>文章</span></div>
-          <div class="stat"><b>4</b><span>分类</span></div>
-          <div class="stat"><b>10</b><span>年份</span></div>
+          <div class="stat"><b id="stat-articles">7</b><span>文章</span></div>
+          <div class="stat"><b id="stat-categories">5</b><span>分类</span></div>
+          <div class="stat"><b id="stat-years">1</b><span>年份</span></div>
         </div>
       </section>
 
@@ -574,7 +574,7 @@ body {
           <span class="section-meta" id="latest-count">共 6 篇</span>
         </div>
         <div class="blog-grid" id="latest-grid">
-          <a href="#" data-dom-id="link-article-1" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-1" class="blog-card">
             <img class="thumb" src="assets/carousel-morning.svg" alt="雾山日出徒步">
             <div class="body">
               <div class="blog-meta"><span class="tag">旅行</span><span class="blog-date">2026.05.12</span></div>
@@ -582,7 +582,7 @@ body {
               <p class="blog-excerpt">清晨四点的盘山公路，云海之上的一束光，记录一次凌晨出发的短途徒步。</p>
             </div>
           </a>
-          <a href="#" data-dom-id="link-article-2" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-2" class="blog-card">
             <img class="thumb" src="assets/carousel-night.svg" alt="城市夜景">
             <div class="body">
               <div class="blog-meta"><span class="tag">电影</span><span class="blog-date">2026.04.28</span></div>
@@ -590,7 +590,7 @@ body {
               <p class="blog-excerpt">一部关于孤独与相遇的都市影像手记，写给深夜还醒着的城市漫游者。</p>
             </div>
           </a>
-          <a href="#" data-dom-id="link-article-3" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-3" class="blog-card">
             <img class="thumb" src="assets/carousel-mountain.svg" alt="雪山徒步">
             <div class="body">
               <div class="blog-meta"><span class="tag">旅行</span><span class="blog-date">2026.03.09</span></div>
@@ -598,7 +598,7 @@ body {
               <p class="blog-excerpt">海拔四千米的一夜星空与清晨的第一缕阳光，一次关于耐心的自我对话。</p>
             </div>
           </a>
-          <a href="#" data-dom-id="link-article-4" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-4" class="blog-card">
             <img class="thumb" src="assets/category-food.svg" alt="深夜食堂">
             <div class="body">
               <div class="blog-meta"><span class="tag">美食</span><span class="blog-date">2026.02.17</span></div>
@@ -606,7 +606,7 @@ body {
               <p class="blog-excerpt">一碗热汤面，一盏暖黄的灯，记录那些被食物治愈的夜晚。</p>
             </div>
           </a>
-          <a href="#" data-dom-id="link-article-5" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-5" class="blog-card">
             <img class="thumb" src="assets/category-music.svg" alt="黑胶唱片">
             <div class="body">
               <div class="blog-meta"><span class="tag">音乐</span><span class="blog-date">2026.01.30</span></div>
@@ -614,7 +614,7 @@ body {
               <p class="blog-excerpt">从深夜实验电子到清晨民谣，十首歌陪我走过一整年。</p>
             </div>
           </a>
-          <a href="#" data-dom-id="link-article-6" class="blog-card">
+          <a href="article.html" data-dom-id="link-article-6" class="blog-card">
             <img class="thumb" src="assets/category-cinema.svg" alt="电影胶片">
             <div class="body">
               <div class="blog-meta"><span class="tag">电影</span><span class="blog-date">2026.01.06</span></div>
@@ -639,10 +639,10 @@ body {
 
   <!-- 移动端底部 Tab Bar -->
   <nav class="mobile-tabbar" aria-label="底部导航">
-    <a href="#" data-nav-key="home" data-active="true" class="mtab"><i data-lucide="home"></i><span>首页</span></a>
-    <a href="#" data-nav-key="life" data-dom-id="tab-life" class="mtab"><i data-lucide="camera"></i><span>人生时刻</span></a>
-    <a href="#" data-nav-key="category" data-dom-id="tab-category" class="mtab"><i data-lucide="layout-grid"></i><span>分类点评</span></a>
-    <a href="#" data-nav-key="blog" data-dom-id="tab-blog" class="mtab"><i data-lucide="pen-line"></i><span>博客创作</span></a>
+    <a href="index.html" data-nav-key="home" data-active="true" class="mtab"><i data-lucide="home"></i><span>首页</span></a>
+    <a href="life.html" data-nav-key="life" data-dom-id="tab-life" class="mtab"><i data-lucide="camera"></i><span>人生时刻</span></a>
+    <a href="category.html" data-nav-key="category" data-dom-id="tab-category" class="mtab"><i data-lucide="layout-grid"></i><span>分类点评</span></a>
+    <a href="blog.html" data-nav-key="blog" data-dom-id="tab-blog" class="mtab"><i data-lucide="pen-line"></i><span>博客创作</span></a>
   </nav>
 
   <script>
@@ -684,13 +684,13 @@ body {
             if (p) p.textContent = c.subtitle;
           });
         }
-        var posts = CMS.latest(6);
+        var all = CMS.snapshot().posts || [];
         var grid = document.getElementById('latest-grid');
         var count = document.getElementById('latest-count');
-        if (grid && posts.length) {
-          count.textContent = '共 ' + posts.length + ' 篇';
-          grid.innerHTML = posts.map(function (p, i) {
-            return '<a href="#" data-dom-id="link-article-' + (i + 1) + '" class="blog-card">' +
+        if (grid && all.length) {
+          count.textContent = '共 ' + all.length + ' 篇';
+          grid.innerHTML = all.slice(0, 6).map(function (p, i) {
+            return '<a href="article.html" data-dom-id="link-article-' + (i + 1) + '" class="blog-card">' +
               '<img class="thumb" src="' + esc(CMS.resolveAsset(p.cover)) + '" alt="' + esc(p.title) + '">' +
               '<div class="body">' +
               '<div class="flex items-center gap-2"><span class="tag">' + esc(p.category || '') + '</span><span class="text-xs text-muted-foreground">' + esc(p.date || '') + '</span></div>' +
@@ -698,6 +698,23 @@ body {
               '<p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">' + esc(p.excerpt || p.subtitle || '') + '</p>' +
               '</div></a>';
           }).join('');
+        }
+        /* 真实统计：文章数 / 分类数 / 年份数 */
+        var sArt = document.getElementById('stat-articles');
+        var sCat = document.getElementById('stat-categories');
+        var sYear = document.getElementById('stat-years');
+        if (all.length) {
+          var catSet = {}, yearSet = {};
+          all.forEach(function (p) {
+            if (p.category) catSet[p.category] = 1;
+            if (p.date) {
+              var m = String(p.date).match(/\d{4}/);
+              if (m) yearSet[m[0]] = 1;
+            }
+          });
+          if (sArt) sArt.textContent = all.length;
+          if (sCat) sCat.textContent = Object.keys(catSet).length;
+          if (sYear) sYear.textContent = Object.keys(yearSet).length;
         }
       }).catch(function () { /* 数据未加载时保留静态内容 */ });
     })();
