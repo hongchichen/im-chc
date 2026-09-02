@@ -366,9 +366,9 @@ body {
       <section class="mt-10" aria-labelledby="latest-title">
         <div class="mb-5 flex items-end justify-between">
           <h2 id="latest-title" class="font-display text-2xl font-bold">最新博客</h2>
-          <span class="text-sm text-muted-foreground">共 6 篇</span>
+          <span class="text-sm text-muted-foreground" id="latest-count">共 6 篇</span>
         </div>
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="latest-grid">
           <a href="article.html" data-dom-id="link-article-1" class="blog-card">
             <img class="thumb" src="assets/carousel-morning.svg" alt="雾山日出徒步">
             <div class="body">
@@ -448,6 +448,50 @@ body {
       dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
       setInterval(function () { go(i + 1); }, 5000);
       go(0);
+    })();
+  </script>
+  <script src="assets/cms.js"></script>
+  <script>
+    (function () {
+      var CMS = window.IM_CMS;
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      CMS.loadLocal().then(function () {
+        /* 轮播 */
+        var slides = Array.prototype.slice.call(document.querySelectorAll('[data-carousel-slide]'));
+        var dots = Array.prototype.slice.call(document.querySelectorAll('[data-carousel-dot]'));
+        var carousel = CMS.snapshot().carousel || [];
+        if (carousel.length && slides.length === carousel.length) {
+          carousel.forEach(function (c, k) {
+            var s = slides[k];
+            var img = s.querySelector('img');
+            var tag = s.querySelector('.tag');
+            var h = s.querySelector('h1');
+            var p = s.querySelector('p');
+            if (img) img.src = c.cover;
+            if (tag) tag.textContent = c.tag;
+            if (h) h.textContent = c.title;
+            if (p) p.textContent = c.subtitle;
+          });
+        }
+        /* 最新文章列表 */
+        var posts = CMS.latest(6);
+        var grid = document.getElementById('latest-grid');
+        var count = document.getElementById('latest-count');
+        if (grid && posts.length) {
+          count.textContent = '共 ' + posts.length + ' 篇';
+          grid.innerHTML = posts.map(function (p, i) {
+            return '<a href="article.html?id=' + encodeURIComponent(p.id) + '" data-dom-id="link-article-' + (i + 1) + '" class="blog-card">' +
+              '<img class="thumb" src="' + esc(p.cover) + '" alt="' + esc(p.title) + '">' +
+              '<div class="body">' +
+              '<div class="flex items-center gap-2"><span class="tag">' + esc(p.category || '') + '</span><span class="text-xs text-muted-foreground">' + esc(p.date || '') + '</span></div>' +
+              '<h3 class="font-display text-base font-semibold leading-snug">' + esc(p.title) + '</h3>' +
+              '<p class="line-clamp-2 text-sm leading-relaxed text-muted-foreground">' + esc(p.excerpt || p.subtitle || '') + '</p>' +
+              '</div></a>';
+          }).join('');
+        }
+      }).catch(function () { /* 数据未加载时保留静态内容 */ });
     })();
   </script>
   <script>lucide.createIcons();</script>

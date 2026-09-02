@@ -284,11 +284,16 @@ body {
     .pick .check{position:absolute;top:6px;right:6px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:999px;background:var(--im-primary);color:var(--im-primary-foreground)}
     .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;width:100%;border-radius:10px;background:var(--im-primary);color:var(--im-primary-foreground);font-size:14px;font-weight:600;transition:transform .16s ease,opacity .16s ease}
     .btn-primary:hover{transform:translateY(-1px);opacity:.94}
+    .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
     .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;border-radius:10px;border:1px solid var(--im-border);color:var(--im-foreground);font-size:14px;font-weight:500;transition:border-color .16s ease}
     .btn-secondary:hover{border-color:color-mix(in srgb,var(--im-primary) 45%,var(--im-border))}
     .post-item{display:flex;align-items:center;gap:10px;width:100%;border-radius:10px;padding:9px 10px;text-align:left;color:var(--im-muted-foreground);transition:background .16s ease}
     .post-item:hover{background:color-mix(in srgb,var(--im-primary) 8%,transparent)}
     .post-item[data-active="true"]{background:color-mix(in srgb,var(--im-primary) 12%,transparent);color:var(--im-foreground)}
+    .conn-dot{width:8px;height:8px;border-radius:999px;background:var(--im-neutral-600);flex-shrink:0}
+    .conn-dot[data-connected="true"]{background:var(--state-success)}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);z-index:60;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;background:var(--im-popover);border:1px solid var(--im-border);box-shadow:var(--im-shadow-lg);opacity:0;transition:opacity .2s ease,transform .2s ease;pointer-events:none;max-width:80vw;text-align:center}
+    .toast[data-show="true"]{opacity:1;transform:translateX(-50%) translateY(0)}
   </style>
 
   <div class="shell-root">
@@ -307,7 +312,7 @@ body {
           <a href="blog.html" data-nav-key="blog" data-active="true" class="nav-item">博客创作</a>
         </nav>
         <div class="flex items-center gap-3">
-          <span class="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"><i data-lucide="save" class="h-3.5 w-3.5"></i>草稿已保存</span>
+          <span class="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"><span class="conn-dot" id="conn-dot"></span><span id="conn-label">未连接</span></span>
           <button type="button" class="icon-btn" aria-label="设置"><i data-lucide="settings" class="h-[18px] w-[18px]"></i></button>
         </div>
       </div>
@@ -319,79 +324,59 @@ body {
         <aside class="panel flex flex-col p-3" aria-label="文章列表">
           <div class="mb-2 flex items-center justify-between px-2 py-1">
             <span class="text-sm font-semibold">我的文章</span>
-            <button type="button" class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" aria-label="新建文章"><i data-lucide="plus" class="h-4 w-4"></i></button>
+            <button type="button" id="btn-new" class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" aria-label="新建文章"><i data-lucide="plus" class="h-4 w-4"></i></button>
           </div>
-          <div class="flex flex-col gap-1">
-            <button type="button" data-active="true" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">雾山日出，一场说走就走…</span></button>
-            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">深夜霓虹下的城市漫游指南</span></button>
-            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">在雪线之上，遇见自己</span></button>
-            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">2026 我的年度歌单 Top 10</span></button>
-            <button type="button" class="post-item"><i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">巷口那家深夜食堂的治愈力</span></button>
-          </div>
+          <div class="flex flex-col gap-1" id="post-list"><!-- 动态渲染 --></div>
         </aside>
 
         <!-- 中间：编辑器 -->
         <section class="panel overflow-hidden" aria-label="编辑器">
-          <input class="input !h-[58px] rounded-none border-l-0 border-r-0 border-t-0 text-base font-semibold" type="text" placeholder="标题" value="雾山日出，一场说走就走的短途徒步">
+          <input class="input !h-[58px] rounded-none border-l-0 border-r-0 border-t-0 text-base font-semibold" id="title-input" type="text" placeholder="文章标题">
+          <input class="input !h-[44px] rounded-none border-l-0 border-r-0 border-t-0 text-sm text-muted-foreground" id="subtitle-input" type="text" placeholder="一句话副标题">
           <div class="flex items-center gap-1 border-b border-border bg-muted px-3 py-2">
-            <span class="toolbar-btn"><i data-lucide="bold" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="italic" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="heading-2" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="list" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="quote" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="image-plus" class="h-4 w-4"></i></span>
-            <span class="toolbar-btn"><i data-lucide="code" class="h-4 w-4"></i></span>
-            <span class="ml-auto text-xs text-muted-foreground">Markdown</span>
+            <button type="button" class="toolbar-btn" data-md="bold" aria-label="加粗"><i data-lucide="bold" class="h-4 w-4"></i></button>
+            <button type="button" class="toolbar-btn" data-md="italic" aria-label="斜体"><i data-lucide="italic" class="h-4 w-4"></i></button>
+            <button type="button" class="toolbar-btn" data-md="h2" aria-label="二级标题"><i data-lucide="heading-2" class="h-4 w-4"></i></button>
+            <button type="button" class="toolbar-btn" data-md="quote" aria-label="引用"><i data-lucide="quote" class="h-4 w-4"></i></button>
+            <span class="ml-auto text-xs text-muted-foreground">Markdown · ## 标题 / > 引用</span>
           </div>
-          <textarea class="textarea" aria-label="正文">清晨四点的盘山公路，薄雾把路灯晕成一团光。
-
-## 出发
-凌晨三点起床，背包里只有水、面包和一件冲锋衣。云海之上，太阳正慢慢升起。
-
-## 云海之上
-四点四十分，天边开始泛白。云雾从山谷里漫上来，像一片缓慢翻涌的海。</textarea>
+          <textarea class="textarea" id="content-input" aria-label="正文" placeholder="支持 Markdown：## 章节标题、> 引用、段落"></textarea>
         </section>
 
-        <!-- 右侧：发布设置 -->
+        <!-- 右侧：发布设置 + 仓库连接 -->
         <aside class="flex flex-col gap-5" aria-label="发布设置">
           <section class="panel p-4">
+            <span class="field-label">GitHub 连接</span>
+            <input class="input mb-2" id="token-input" type="password" placeholder="粘贴 GitHub Token（ghp_ / github_pat_）">
+            <p class="mb-3 text-xs leading-relaxed text-muted-foreground">需要具备仓库 <code class="rounded bg-muted px-1 py-0.5">contents:write</code> 权限的 Token，仅保存在本机浏览器。</p>
+            <button type="button" id="btn-connect" class="btn-secondary w-full"><i data-lucide="plug" class="h-4 w-4"></i>连接并加载</button>
+          </section>
+
+          <section class="panel p-4">
             <span class="field-label">归类标签</span>
-            <div class="flex flex-wrap gap-2">
-              <button type="button" data-active="true" class="chip"><i data-lucide="clapperboard" class="h-3.5 w-3.5"></i>电影</button>
-              <button type="button" class="chip"><i data-lucide="disc" class="h-3.5 w-3.5"></i>音乐</button>
-              <button type="button" class="chip"><i data-lucide="compass" class="h-3.5 w-3.5"></i>旅行</button>
-              <button type="button" class="chip"><i data-lucide="utensils" class="h-3.5 w-3.5"></i>美食</button>
+            <div class="flex flex-wrap gap-2" id="cat-chips">
+              <button type="button" data-cat="电影" class="chip"><i data-lucide="clapperboard" class="h-3.5 w-3.5"></i>电影</button>
+              <button type="button" data-cat="音乐" class="chip"><i data-lucide="disc" class="h-3.5 w-3.5"></i>音乐</button>
+              <button type="button" data-cat="旅行" class="chip"><i data-lucide="compass" class="h-3.5 w-3.5"></i>旅行</button>
+              <button type="button" data-cat="美食" class="chip"><i data-lucide="utensils" class="h-3.5 w-3.5"></i>美食</button>
             </div>
           </section>
 
           <section class="panel p-4">
-            <span class="field-label">首页轮播图配置 <span class="font-normal text-muted-foreground">（最多 3 张）</span></span>
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" data-active="true" class="pick" aria-label="选择雾山晨景">
-                <img src="assets/carousel-morning.svg" alt="雾山晨景">
-                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
-              </button>
-              <button type="button" data-active="true" class="pick" aria-label="选择城市夜景">
-                <img src="assets/carousel-night.svg" alt="城市夜景">
-                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
-              </button>
-              <button type="button" data-active="true" class="pick" aria-label="选择雪山峰峦">
-                <img src="assets/carousel-mountain.svg" alt="雪山峰峦">
-                <span class="check"><i data-lucide="check" class="h-3 w-3"></i></span>
-              </button>
-            </div>
-          </section>
-
-          <section class="panel p-4">
-            <div class="flex items-center justify-between">
-              <span class="field-label mb-0">发布时间</span>
-              <span class="text-xs text-muted-foreground">2026.05.12 08:30</span>
+            <span class="field-label">封面图</span>
+            <div class="grid grid-cols-3 gap-2" id="cover-picks">
+              <button type="button" data-cover="assets/carousel-morning.svg" class="pick" aria-label="选择雾山晨景"><img src="assets/carousel-morning.svg" alt="雾山晨景"></button>
+              <button type="button" data-cover="assets/carousel-night.svg" class="pick" aria-label="选择城市夜景"><img src="assets/carousel-night.svg" alt="城市夜景"></button>
+              <button type="button" data-cover="assets/carousel-mountain.svg" class="pick" aria-label="选择雪山峰峦"><img src="assets/carousel-mountain.svg" alt="雪山峰峦"></button>
+              <button type="button" data-cover="assets/category-food.svg" class="pick" aria-label="选择美食"><img src="assets/category-food.svg" alt="美食"></button>
+              <button type="button" data-cover="assets/category-music.svg" class="pick" aria-label="选择音乐"><img src="assets/category-music.svg" alt="音乐"></button>
+              <button type="button" data-cover="assets/category-cinema.svg" class="pick" aria-label="选择电影"><img src="assets/category-cinema.svg" alt="电影"></button>
             </div>
           </section>
 
           <div class="flex flex-col gap-2">
-            <button type="button" class="btn-primary"><i data-lucide="send" class="h-4 w-4"></i>发布文章</button>
-            <button type="button" class="btn-secondary"><i data-lucide="save" class="h-4 w-4"></i>保存草稿</button>
+            <button type="button" id="btn-publish" class="btn-primary" disabled><i data-lucide="send" class="h-4 w-4"></i>发布并同步到仓库</button>
+            <button type="button" id="btn-delete" class="btn-secondary" disabled><i data-lucide="trash-2" class="h-4 w-4"></i>删除当前文章</button>
           </div>
         </aside>
       </div>
@@ -410,20 +395,237 @@ body {
     </footer>
   </div>
 
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="assets/cms.js"></script>
   <script>
     (function () {
-      Array.prototype.forEach.call(document.querySelectorAll('.chip, .pick, .post-item'), function (el) {
-        el.addEventListener('click', function () {
-          var group = el.classList.contains('post-item');
-          if (group) {
-            Array.prototype.forEach.call(document.querySelectorAll('.post-item'), function (o) { o.setAttribute('data-active', 'false'); });
-            el.setAttribute('data-active', 'true');
-            return;
+      var CMS = window.IM_CMS;
+      var currentId = null;
+      var token = CMS.getToken();
+      var listEl = document.getElementById('post-list');
+      var titleInput = document.getElementById('title-input');
+      var subtitleInput = document.getElementById('subtitle-input');
+      var contentInput = document.getElementById('content-input');
+      var tokenInput = document.getElementById('token-input');
+      var btnConnect = document.getElementById('btn-connect');
+      var btnPublish = document.getElementById('btn-publish');
+      var btnDelete = document.getElementById('btn-delete');
+      var btnNew = document.getElementById('btn-new');
+      var connDot = document.getElementById('conn-dot');
+      var connLabel = document.getElementById('conn-label');
+      var toast = document.getElementById('toast');
+      var toastTimer = null;
+
+      var catEls = Array.prototype.slice.call(document.querySelectorAll('#cat-chips .chip'));
+      var coverEls = Array.prototype.slice.call(document.querySelectorAll('#cover-picks .pick'));
+      var selectedCat = null;
+      var selectedCover = null;
+
+      tokenInput.value = token || '';
+      if (token) { setConn(true, '已连接'); } else { setConn(false, '未连接'); }
+
+      function setConn(ok, label) {
+        connDot.setAttribute('data-connected', ok ? 'true' : 'false');
+        connLabel.textContent = label || (ok ? '已连接' : '未连接');
+      }
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.setAttribute('data-show', 'true');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.setAttribute('data-show', 'false'); }, 2600);
+      }
+      function renderList() {
+        listEl.innerHTML = '';
+        var posts = CMS.latest(50);
+        if (!posts.length) {
+          var empty = document.createElement('p');
+          empty.className = 'px-2 py-6 text-center text-xs text-muted-foreground';
+          empty.textContent = '暂无文章，点击右上角新建';
+          listEl.appendChild(empty);
+        }
+        posts.forEach(function (p) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'post-item' + (p.id === currentId ? ' [data-active]' : '');
+          if (p.id === currentId) btn.setAttribute('data-active', 'true');
+          btn.innerHTML = '<i data-lucide="file-text" class="h-4 w-4 shrink-0"></i><span class="truncate text-[13px]">' + esc(p.title || '未命名') + '</span>';
+          btn.addEventListener('click', function () { loadPost(p.id); });
+          listEl.appendChild(btn);
+        });
+        if (window.lucide) lucide.createIcons();
+      }
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function loadPost(id) {
+        var p = CMS.getPost(id);
+        if (!p) return;
+        currentId = id;
+        titleInput.value = p.title || '';
+        subtitleInput.value = p.subtitle || '';
+        contentInput.value = p.content || '';
+        selectedCat = p.category || null;
+        selectedCover = p.cover || null;
+        updateChips();
+        updateCovers();
+        renderList();
+        btnPublish.disabled = !token;
+        btnDelete.disabled = false;
+      }
+      function newPost() {
+        currentId = null;
+        titleInput.value = '';
+        subtitleInput.value = '';
+        contentInput.value = '';
+        selectedCat = null;
+        selectedCover = null;
+        updateChips();
+        updateCovers();
+        renderList();
+        btnDelete.disabled = true;
+        btnPublish.disabled = !token;
+        titleInput.focus();
+      }
+      function updateChips() {
+        catEls.forEach(function (c) {
+          var on = c.getAttribute('data-cat') === selectedCat;
+          c.setAttribute('data-active', on ? 'true' : 'false');
+        });
+      }
+      function updateCovers() {
+        coverEls.forEach(function (c) {
+          var on = c.getAttribute('data-cover') === selectedCover;
+          c.setAttribute('data-active', on ? 'true' : 'false');
+          var check = c.querySelector('.check');
+          if (on && !check) {
+            var s = document.createElement('span');
+            s.className = 'check';
+            s.innerHTML = '<i data-lucide="check" class="h-3 w-3"></i>';
+            c.appendChild(s);
+            if (window.lucide) lucide.createIcons();
+          } else if (!on && check) {
+            check.remove();
           }
-          var active = el.getAttribute('data-active') === 'true';
-          el.setAttribute('data-active', active ? 'false' : 'true');
+        });
+      }
+
+      /* 交互：分类 / 封面 */
+      catEls.forEach(function (c) {
+        c.addEventListener('click', function () {
+          selectedCat = c.getAttribute('data-cat') === selectedCat ? null : c.getAttribute('data-cat');
+          updateChips();
         });
       });
+      coverEls.forEach(function (c) {
+        c.addEventListener('click', function () {
+          selectedCover = c.getAttribute('data-cover');
+          updateCovers();
+        });
+      });
+
+      /* 工具栏插入 Markdown */
+      Array.prototype.forEach.call(document.querySelectorAll('.toolbar-btn[data-md]'), function (b) {
+        b.addEventListener('click', function () {
+          var kind = b.getAttribute('data-md');
+          var s = contentInput.selectionStart, e = contentInput.selectionEnd;
+          var sel = contentInput.value.slice(s, e) || '文本';
+          var wrap = { bold: '**' + sel + '**', italic: '_' + sel + '_', h2: '\n## ' + sel + '\n', quote: '\n> ' + sel + '\n' }[kind];
+          contentInput.value = contentInput.value.slice(0, s) + wrap + contentInput.value.slice(e);
+          contentInput.focus();
+        });
+      });
+
+      /* 连接 */
+      btnConnect.addEventListener('click', function () {
+        var t = tokenInput.value.trim();
+        if (!t) { showToast('请先粘贴 GitHub Token'); return; }
+        btnConnect.disabled = true;
+        btnConnect.innerHTML = '<i data-lucide="loader" class="h-4 w-4 animate-spin"></i>连接中…';
+        if (window.lucide) lucide.createIcons();
+        CMS.loadFromGithub(t).then(function () {
+          token = t;
+          CMS.setToken(t);
+          setConn(true, '已连接');
+          btnPublish.disabled = false;
+          if (!currentId) { loadPost(CMS.latest(1)[0] ? CMS.latest(1)[0].id : null); }
+          if (!currentId) newPost();
+          showToast('已连接，文章已从仓库加载');
+        }).catch(function (err) {
+          if (err.message === 'BAD_TOKEN') { showToast('Token 无效或无权限，请检查'); }
+          else if (err.message === 'NOT_FOUND') { showToast('仓库中未找到 data/posts.json'); }
+          else { showToast('连接失败：' + err.message); }
+        }).finally(function () {
+          btnConnect.disabled = false;
+          btnConnect.innerHTML = '<i data-lucide="plug" class="h-4 w-4"></i>连接并加载';
+          if (window.lucide) lucide.createIcons();
+        });
+      });
+
+      /* 发布 */
+      function collect() {
+        var posts = CMS.latest(50).map(function (p) { return p; });
+        var post = null;
+        if (currentId) {
+          for (var i = 0; i < posts.length; i++) { if (posts[i].id === currentId) { post = posts[i]; break; } }
+        }
+        if (!post) {
+          post = { id: 'post-' + Date.now(), featured: false };
+          posts.unshift(post);
+        }
+        post.title = titleInput.value.trim() || '未命名文章';
+        post.subtitle = subtitleInput.value.trim();
+        post.category = selectedCat || '生活';
+        post.cover = selectedCover || 'assets/carousel-morning.svg';
+        post.content = contentInput.value;
+        post.excerpt = (contentInput.value || '').replace(/[#>*\n]/g, ' ').trim().slice(0, 80) || post.subtitle;
+        if (!post.date) { var d = new Date(); post.date = d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0'); }
+        return posts;
+      }
+      btnPublish.addEventListener('click', function () {
+        if (!token) { showToast('请先连接 GitHub'); return; }
+        var snapshot = CMS.snapshot();
+        snapshot.posts = collect();
+        btnPublish.disabled = true;
+        var original = btnPublish.innerHTML;
+        btnPublish.innerHTML = '<i data-lucide="loader" class="h-4 w-4 animate-spin"></i>同步中…';
+        if (window.lucide) lucide.createIcons();
+        CMS.saveToGithub(snapshot, token, '更新博客内容').then(function () {
+          showToast('已发布，仓库已更新，稍候自动重新部署');
+        }).catch(function (err) {
+          if (err.message === 'BAD_TOKEN') { showToast('Token 无写权限，请检查'); }
+          else { showToast('同步失败：' + err.message); }
+        }).finally(function () {
+          btnPublish.innerHTML = original;
+          btnPublish.disabled = false;
+          if (window.lucide) lucide.createIcons();
+        });
+      });
+
+      /* 删除 */
+      btnDelete.addEventListener('click', function () {
+        if (!currentId) return;
+        var posts = collect().filter(function (p) { return p.id !== currentId; });
+        var snapshot = CMS.snapshot();
+        snapshot.posts = posts;
+        btnDelete.disabled = true;
+        CMS.saveToGithub(snapshot, token, '删除文章').then(function () {
+          showToast('已删除并同步到仓库');
+          newPost();
+        }).catch(function (err) { showToast('删除失败：' + err.message); }).finally(function () {
+          btnDelete.disabled = false;
+        });
+      });
+
+      btnNew.addEventListener('click', newPost);
+
+      /* 初始：无 token 时也加载本地数据作为预览 */
+      CMS.loadLocal().then(function () {
+        if (!token) {
+          if (CMS.latest(1).length) { loadPost(CMS.latest(1)[0].id); }
+          else { newPost(); }
+        }
+      }).catch(function () { /* 忽略，等待用户连接 */ });
     })();
   </script>
   <script>lucide.createIcons();</script>

@@ -312,7 +312,7 @@ body {
         <p class="mt-2 text-sm text-muted-foreground">电影、音乐、旅行与美食，四类生活切片</p>
       </div>
 
-      <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="分类卡片">
+      <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="分类卡片" id="cat-grid">
         <a href="#" class="cat-card">
           <img src="assets/category-cinema.svg" alt="电影分类">
           <div class="shade"></div>
@@ -385,6 +385,37 @@ body {
     </footer>
   </div>
 
+  <script src="assets/cms.js"></script>
+  <script>
+    (function () {
+      var CMS = window.IM_CMS;
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      CMS.loadLocal().then(function () {
+        var cats = CMS.snapshot().categories || {};
+        var grid = document.getElementById('cat-grid');
+        if (!grid) return;
+        var iconMap = { clapperboard: 'clapperboard', disc: 'disc', compass: 'compass', utensils: 'utensils' };
+        var names = ['电影', '音乐', '旅行', '美食'];
+        grid.innerHTML = names.map(function (name) {
+          var c = cats[name] || {};
+          return '<a href="#" class="cat-card">' +
+            '<img src="' + esc(c.cover || '') + '" alt="' + esc(name) + '分类">' +
+            '<div class="shade"></div>' +
+            '<div class="cat-body">' +
+            '<div class="flex items-center gap-3">' +
+            '<span class="cat-icon"><i data-lucide="' + (iconMap[name] || 'tag') + '" class="h-5 w-5"></i></span>' +
+            '<div class="min-w-0"><h2 class="font-display text-lg font-bold">' + esc(name) + '</h2>' +
+            '<p class="cat-count">' + (c.count != null ? c.count + ' 篇' : '') + '</p></div>' +
+            '</div>' +
+            '<p class="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">' + esc(c.desc || '') + '</p>' +
+            '</div></a>';
+        }).join('');
+        if (window.lucide) lucide.createIcons();
+      }).catch(function () { /* 保留静态分类卡片 */ });
+    })();
+  </script>
   <script>lucide.createIcons();</script>
 </body>
 </html>

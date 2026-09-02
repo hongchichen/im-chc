@@ -308,17 +308,17 @@ body {
     <main class="w-full max-w-6xl self-center px-6 pb-6 pt-6">
       <a href="index.html" data-dom-id="back-home" class="back-btn mb-8"><i data-lucide="arrow-left" class="h-4 w-4"></i>返回首页</a>
 
-      <article class="mx-auto max-w-3xl">
+      <article class="mx-auto max-w-3xl" id="article-root">
         <div class="flex items-center gap-3">
-          <span class="tag">旅行</span>
-          <span class="text-sm text-muted-foreground">2026.05.12 · 6 分钟阅读</span>
+          <span class="tag" id="art-cat">旅行</span>
+          <span class="text-sm text-muted-foreground" id="art-meta">2026.05.12 · 6 分钟阅读</span>
         </div>
-        <h1 class="font-display mt-4 text-4xl font-bold leading-tight">雾山日出，一场说走就走的短途徒步</h1>
-        <p class="mt-3 text-lg text-muted-foreground">清晨四点的盘山公路与云海之上的一束光</p>
+        <h1 class="font-display mt-4 text-4xl font-bold leading-tight" id="art-title">雾山日出，一场说走就走的短途徒步</h1>
+        <p class="mt-3 text-lg text-muted-foreground" id="art-subtitle">清晨四点的盘山公路与云海之上的一束光</p>
 
-        <img class="mt-7 aspect-[16/9] w-full rounded-2xl border border-border object-cover" src="assets/carousel-morning.svg" alt="雾山日出徒步封面">
+        <img class="mt-7 aspect-[16/9] w-full rounded-2xl border border-border object-cover" id="art-cover" src="assets/carousel-morning.svg" alt="雾山日出徒步封面">
 
-        <div class="mt-8 article-body">
+        <div class="mt-8 article-body" id="art-content">
           <p>凌晨三点，闹钟把整个房间叫醒。背包里只有一瓶水、两片面包和一件冲锋衣，我便出了门。</p>
           <p>车沿盘山公路缓缓爬升，路灯把薄雾晕成一团一团的暖光。同行的人不多，大家都安静地等着天亮。</p>
           <h2>云海之上</h2>
@@ -329,7 +329,7 @@ body {
           <p>这条路线全程往返约八公里，爬升不到六百米，对新手足够友好。如果你也想看云海日出，记得查好天气，凌晨出发。</p>
         </div>
 
-        <div class="mt-9 flex flex-wrap gap-2 border-t border-border pt-6">
+        <div class="mt-9 flex flex-wrap gap-2 border-t border-border pt-6" id="art-tags">
           <span class="tag">短途徒步</span>
           <span class="tag">云海</span>
           <span class="tag">日出</span>
@@ -351,6 +351,40 @@ body {
     </footer>
   </div>
 
+  <script src="assets/cms.js"></script>
+  <script>
+    (function () {
+      var CMS = window.IM_CMS;
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function apply(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+      function applyHtml(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+      function pickId() {
+        var m = (location.search || '').match(/[?&]id=([^&]+)/);
+        return m ? decodeURIComponent(m[1]) : null;
+      }
+      CMS.loadLocal().then(function () {
+        var id = pickId();
+        var post = CMS.getPost(id);
+        if (!post) {
+          var arr = CMS.latest(1);
+          if (arr.length) { post = arr[0]; }
+        }
+        if (!post) return;
+        apply('art-cat', post.category || '');
+        apply('art-meta', (post.date || '') + ' · ' + (post.readingMinutes || 5) + ' 分钟阅读');
+        apply('art-title', post.title || '');
+        apply('art-subtitle', post.subtitle || '');
+        var cover = document.getElementById('art-cover');
+        if (cover && post.cover) cover.src = post.cover;
+        applyHtml('art-content', CMS.renderMarkdown(post.content || ''));
+        var tags = (post.tags || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
+        applyHtml('art-tags', tags);
+        document.title = (post.title || '文章') + ' · Im-chc';
+      }).catch(function () { /* 数据未加载时保留静态示例 */ });
+    })();
+  </script>
   <script>lucide.createIcons();</script>
 </body>
 </html>
